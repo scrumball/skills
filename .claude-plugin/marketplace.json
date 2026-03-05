@@ -1,0 +1,26 @@
+{
+  "name": "scrumball-skills",
+  "owner": {
+    "name": "Scrumball",
+    "email": "platform@scrumball.com"
+  },
+  "metadata": {
+    "description": "Scrumball influencer skills for discovery, audience fit, realtime enrichment, campaign monitoring, and commerce intelligence.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "scrumball-influencer-skills",
+      "description": "Unified influencer skill set with equal access under one API key.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/influencer-lead-discovery",
+        "./skills/influencer-audience-fit-scoring",
+        "./skills/influencer-realtime-enrichment",
+        "./skills/influencer-campaign-monitoring",
+        "./skills/influencer-commerce-intel"
+      ]
+    }
+  ]
+}
