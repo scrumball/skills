@@ -1,92 +1,123 @@
 # scrumball-skills
 
-Scrumball influencer skills with self-contained execution scripts per skill.
+`scrumball-skills` is a set of AI Skills for influencer marketing workflows. It helps you:
 
-## Prerequisites
+- discover creators and build candidate pools
+- evaluate creator audience fit against your target segments
+- pull fresh creator metrics for account health checks
+- monitor campaign execution progress
+- analyze commerce performance on channels such as TikTok Shop
 
-- Python 3.9+
-- Network access to `SCRUMBALL_BASE_URL`
-- A valid `SCRUMBALL_API_KEY`
+You can treat these as callable creator data and analytics services: describe your business task in natural language, and the AI can invoke the right Skill when needed.
 
-## Install
+---
 
-Install from registry/repo using your installer, for example:
+## Installation and Included Skills
+
+Install all `scrumball` skills:
 
 ```bash
 npx skills add scrumball/skills
 ```
 
-You can install one skill or all skills.
+This package includes:
 
-## Quick Start (Local)
+- `influencer-lead-discovery`: Search creators by keyword/category/region and build candidate lists.
+- `influencer-audience-fit-scoring`: Analyze creator audience profiles and score target-audience fit.
+- `influencer-realtime-enrichment`: Refresh creator records with up-to-date profile and performance signals.
+- `influencer-campaign-monitoring`: Track campaign task progress and baseline creator performance.
+- `influencer-commerce-intel`: Evaluate creator commerce outcomes, especially for TikTok Shop-like funnels.
 
-```bash
-cp .env.example .env
-# edit .env with your real base URL and API key
-
-python3 skills/influencer-lead-discovery/scripts/execute_operation.py --env-file .env list
-python3 skills/influencer-lead-discovery/scripts/execute_operation.py --env-file .env call --operation ping
-```
-
-## Environment Variables
-
-Required:
-- `SCRUMBALL_BASE_URL`
-- `SCRUMBALL_API_KEY`
-
-Optional:
-- `SCRUMBALL_AUTH_PREFIX`
-- `SCRUMBALL_TIMEOUT_SECONDS`
-
-Example values are in `.env.example`.
-
-## Security
-
-- Never commit real credentials to this repository.
-- Keep secrets in local `.env` only, and rotate keys immediately if exposed.
-- The repository should only contain placeholder values (for example in `.env.example`).
-
-## Skill Call Examples
-
-Run from repository root with `--env-file .env`:
+To install only one Skill:
 
 ```bash
-# 1) Lead discovery
-python3 skills/influencer-lead-discovery/scripts/execute_operation.py --env-file .env call --operation search_tiktok_user --body '{"query":"nike","page":1,"page_size":10}'
-
-# 2) Audience fit scoring
-python3 skills/influencer-audience-fit-scoring/scripts/execute_operation.py --env-file .env call --operation audience_tiktok_interest --query '{"unique_id":"nike"}'
-
-# 3) Realtime enrichment
-python3 skills/influencer-realtime-enrichment/scripts/execute_operation.py --env-file .env call --operation tiktok_realtime_user_info --query '{"unique_id":"nike"}'
-
-# 4) Campaign monitoring
-python3 skills/influencer-campaign-monitoring/scripts/execute_operation.py --env-file .env call --operation list_monitor_tasks
-
-# 5) Commerce intel
-python3 skills/influencer-commerce-intel/scripts/execute_operation.py --env-file .env call --operation tiktok_user_shop_sale --query '{"unique_id":"nike"}'
+npx skills add scrumball/skills --skill <skill-name>
 ```
 
-## Troubleshooting
+Examples:
 
-- `SCRUMBALL_BASE_URL is required`: set `SCRUMBALL_BASE_URL` in `.env`.
-- `SCRUMBALL_API_KEY is required`: set `SCRUMBALL_API_KEY` in `.env`.
-- `Missing required ...`: check required query/body fields for that operation.
-- Network/DNS errors: verify gateway reachability and local network.
+- `npx skills add scrumball/skills --skill influencer-lead-discovery`
+- `npx skills add scrumball/skills --skill influencer-audience-fit-scoring`
+- `npx skills add scrumball/skills --skill influencer-realtime-enrichment`
+- `npx skills add scrumball/skills --skill influencer-campaign-monitoring`
+- `npx skills add scrumball/skills --skill influencer-commerce-intel`
 
-## Skill Folders
+---
 
-- `skills/influencer-lead-discovery`
-- `skills/influencer-audience-fit-scoring`
-- `skills/influencer-realtime-enrichment`
-- `skills/influencer-campaign-monitoring`
-- `skills/influencer-commerce-intel`
+## Skill Capability Overview
 
-Each skill is self-contained and includes:
-- `SKILL.md`
-- `agents/openai.yaml`
-- `references/` (api index, request/response hints, operations)
-- `scripts/execute_operation.py`
+### influencer-lead-discovery
+
+- Search potential creators by keyword, brand, or category
+- Filter by market, language, follower range, and related signals
+- Best for sourcing and shortlist creation
+
+### influencer-audience-fit-scoring
+
+- Analyze audience makeup (interests, geography, age, gender, etc.)
+- Score alignment with your target audience definition
+- Compare multiple creators for selection decisions
+
+### influencer-realtime-enrichment
+
+- Pull fresh follower and engagement indicators
+- Refresh existing creator records before outreach or activation
+- Support recurring account health checks
+
+### influencer-campaign-monitoring
+
+- View campaign-level execution status across participating creators
+- Track publishing progress and baseline performance metrics
+- Support campaign tracking dashboards and reporting
+
+### influencer-commerce-intel
+
+- Focus on closed-loop commerce channels such as TikTok Shop
+- Inspect sales, GMV, and conversion-related signals
+- Prioritize creators with stronger selling capability
+
+---
+
+## Using Skills in AI Conversations
+
+After setup, you can describe requests in natural language inside any AI environment that supports Skills. The AI can call the matching `scrumball` Skill as needed.
+
+Typical prompt examples:
+
+- **Creator discovery (`influencer-lead-discovery`)**
+  - "Find 20 sports creators related to `nike`, each with over 100K followers, mainly in the US and UK. Return a table."
+  - "Search 30 beauty creators targeting Southeast Asia with 50K-500K followers, sorted by follower count."
+
+- **Audience fit scoring (`influencer-audience-fit-scoring`)**
+  - "Analyze TikTok account `nike` and score fit with US users aged 18-24 who are interested in basketball and fitness."
+  - "Compare `xxx1`, `xxx2`, and `xxx3` for a European skincare campaign and explain which one fits best."
+
+- **Realtime health checks (`influencer-realtime-enrichment`)**
+  - "Check creator IDs `id1, id2, id3` for the last 7 days. Flag sharp follower drops or risk signals."
+  - "Pull the latest growth and video performance for TikTok account `nike` and summarize key changes."
+
+- **Campaign monitoring (`influencer-campaign-monitoring`)**
+  - "List all active monitoring tasks sorted by start time."
+  - "For campaign `summer-sale-2025`, list participating creators, published content links, and current baseline performance."
+
+- **Commerce intelligence (`influencer-commerce-intel`)**
+  - "Review TikTok account `nike` for commerce performance, including sales, GMV, and conversion signals."
+  - "Compare three creators on TikTok Shop performance and recommend who to prioritize with reasons."
+
+---
+
+## Common Errors and Troubleshooting
+
+- **`SCRUMBALL_BASE_URL is required` / `SCRUMBALL_API_KEY is required`**
+  - Required runtime configuration is missing. Ask your platform administrator or DevOps owner to provide the environment variables.
+
+- **`Missing required ...`**
+  - A required field was not provided in the call (for example an account ID or query condition). Add the missing details and retry.
+
+- **Network / DNS errors**
+  - The gateway may be temporarily unreachable. Retry later or contact your infrastructure owner.
+
+---
 
 ## License
 
