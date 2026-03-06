@@ -1,33 +1,58 @@
 ---
 name: influencer-campaign-monitoring
-description: Campaign monitoring and review operations. Use when users ask to create/list/detail/refresh/stop monitoring tasks, retrieve creator monitoring metrics during campaign execution, download tracked assets, or build post-campaign performance reviews.
+description: Campaign monitoring operations for TikTok, Instagram, and YouTube, including cross-platform monitor task lifecycle APIs. Use when users need task create/list/detail/refresh/stop, monitoring metrics retrieval, tracked asset download, or post-campaign review with explicit operation mapping.
 ---
 
 # Influencer Campaign Monitoring
 
-Operate monitoring tasks and convert tracking data into review insights.
+Operate monitoring tasks and convert tracking data into actionable campaign review insights.
+
+## Capability Matrix
+
+### YouTube
+
+| Capability | operationId | Interface | Minimum input |
+|---|---|---|---|
+| 任务-视频下载 | `youtube_task_video_download` | `GET /api/v1/youtube/task/video/download` | `query.video_id` |
+| 用户监控指标 | `youtube_user_monitor_metrics` | `GET /api/v1/youtube/user/monitor/metrics` | `query.channel_id` |
+
+### TikTok
+
+| Capability | operationId | Interface | Minimum input |
+|---|---|---|---|
+| 任务-视频下载 | `tiktok_task_video_download` | `GET /api/v1/tiktok/task/video/download` | `query.video_id` |
+| 用户监控指标 | `tiktok_user_monitor_metrics` | `GET /api/v1/tiktok/user/monitor/metrics` | `query.unique_id` |
+
+### Instagram
+
+| Capability | operationId | Interface | Minimum input |
+|---|---|---|---|
+| 任务-视频下载 | `instagram_task_video_download` | `GET /api/v1/instagram/task/video/download` | `query.video_code` |
+| 用户监控指标 | `instagram_user_monitor_metrics` | `GET /api/v1/instagram/user/monitor/metrics` | `query.username` |
+
+### Cross-platform
+
+| Capability | operationId | Interface | Minimum input |
+|---|---|---|---|
+| 创建视频监测任务 | `create_monitor_task` | `POST /api/v1/monitor/video/tasks/create` | `body.platform, body.video_id` |
+| 获取视频监测任务详情 | `get_monitor_task_detail` | `GET /api/v1/monitor/video/tasks/detail` | `query.monitor_id` |
+| 获取视频监测任务列表 | `list_monitor_tasks` | `GET /api/v1/monitor/video/tasks/list` | `none` |
+| 手动刷新视频监测数据 | `refresh_monitor_task` | `POST /api/v1/monitor/video/tasks/refresh` | `query.monitor_id` |
+| 停止视频监测任务 | `stop_monitor_task` | `GET /api/v1/monitor/video/tasks/stop` | `query.monitor_id` |
 
 ## Quick Start
 
 1. Identify monitoring scope (platform, creator/video, timeframe).
-2. Create or retrieve monitoring tasks.
-3. Pull metrics and task status repeatedly.
-4. Summarize trend, anomalies, and actions.
+2. Use Cross-platform matrix rows for task lifecycle operations.
+3. Use platform rows for metrics/download operations.
+4. Report trend, anomalies, and intervention actions.
 
 ## Workflow
 
-1. Task lifecycle:
-- Create task (`create_monitor_task`)
-- List/detail tasks (`list_monitor_tasks`, `get_monitor_task_detail`)
-- Refresh or stop as needed
-
-2. Metric retrieval:
-- Pull user monitor metrics per platform.
-- Download relevant video assets when needed for review.
-
-3. Review output:
-- Track progress vs expected outcome.
-- Highlight anomalies and suggested interventions.
+1. Create or retrieve tasks (`create_monitor_task`, `list_monitor_tasks`, `get_monitor_task_detail`).
+2. Refresh/stop tasks as needed (`refresh_monitor_task`, `stop_monitor_task`).
+3. Pull platform metrics and tracked assets for campaign review.
+4. Summarize movement, anomalies, and next-step recommendation.
 
 ## Tooling
 
@@ -35,7 +60,6 @@ Execution commands:
 - List operations: `python3 scripts/execute_operation.py --env-file .env list`
 - Create task: `python3 scripts/execute_operation.py --env-file .env call --operation create_monitor_task --body '{"platform":"tiktok","video_id":"123456"}'`
 - List tasks: `python3 scripts/execute_operation.py --env-file .env call --operation list_monitor_tasks --query '{"page":1,"page_size":20}'`
-
 
 Required environment variables:
 - `SCRUMBALL_BASE_URL`: API gateway base URL
@@ -58,10 +82,10 @@ Always return:
 
 - If task creation fails, validate platform and video identifier first.
 - If metric endpoints lag, report delayed freshness explicitly.
-- If user requests audience fit conclusions, hand off to audience-fit skill.
+- If user asks for audience-fit decisioning, hand off to audience-fit skill.
 
 ## References
 
-- `references/api-index.md`
-- `references/request-response.md`
-- `references/operations.json`
+- `references/api-index.md`: full operation index + platform grouped index
+- `references/request-response.md`: request parameters + response top-level/data fields + minimal examples
+- `references/operations.json`: operation manifest used by `scripts/execute_operation.py`

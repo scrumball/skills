@@ -1,38 +1,70 @@
 ---
 name: influencer-lead-discovery
-description: Cross-platform influencer discovery and shortlist building. Use when users ask to find creators by keyword/niche/region/engagement, search creator or content candidates, expand similar creators, inspect creator profiles and content history, or produce outreach-ready lead lists.
+description: Cross-platform influencer discovery and shortlist building across YouTube, TikTok, and Instagram. Use when users need creator or content search, similar creator expansion, profile/content enrichment, or outreach-ready lead lists with explicit operationId mapping.
 ---
 
 # Influencer Lead Discovery
 
-Build decision-ready creator shortlists across TikTok, Instagram, and YouTube.
+Build decision-ready creator shortlists across TikTok, Instagram, and YouTube with explicit operation-level mapping.
+
+## Capability Matrix
+
+### YouTube
+
+| Capability | operationId | Interface | Minimum input |
+|---|---|---|---|
+| 搜索youtube用户 | `search_youtube_user` | `POST /api/v1/search/youtube/user` | `body.query` |
+| 搜索youtube视频 | `search_youtube_video` | `POST /api/v1/search/youtube/video` | `body.query` |
+| 合作品牌 | `youtube_user_brands` | `GET /api/v1/youtube/user/brands` | `query.channel_id` |
+| 用户top10 hashtag互动数据 | `youtube_user_hashtag_engagement` | `GET /api/v1/youtube/user/hashtag/engagement` | `query.channel_id` |
+| 用户信息 | `youtube_db_user_info` | `GET /api/v1/youtube/user/info` | `query.anyOf(channel_id,username)` |
+| 相似用户推荐 | `youtube_user_similar` | `GET /api/v1/youtube/user/similar` | `query.anyOf(channel_id,channel_handle)` |
+| 用户视频 | `youtube_db_user_videos` | `GET /api/v1/youtube/user/videos` | `query.channel_id` |
+
+### TikTok
+
+| Capability | operationId | Interface | Minimum input |
+|---|---|---|---|
+| 搜索tiktok用户 | `search_tiktok_user` | `POST /api/v1/search/tiktok/user` | `body.query` |
+| 搜索tiktok视频 | `search_tiktok_video` | `POST /api/v1/search/tiktok/video` | `body.query` |
+| 合作品牌 | `tiktok_user_brands` | `GET /api/v1/tiktok/user/brands` | `query.unique_id` |
+| 用户top10 hashtag互动数据 | `tiktok_user_hashtag_engagement` | `GET /api/v1/tiktok/user/hashtag/engagement` | `query.unique_id` |
+| 用户信息 | `tiktok_db_user_info` | `GET /api/v1/tiktok/user/info` | `query.unique_id` |
+| 相似用户推荐 | `tiktok_user_similar` | `GET /api/v1/tiktok/user/similar` | `query.unique_id` |
+| 用户视频 | `tiktok_db_user_videos` | `GET /api/v1/tiktok/user/videos` | `query.unique_id` |
+
+### Instagram
+
+| Capability | operationId | Interface | Minimum input |
+|---|---|---|---|
+| 合作品牌 | `instagram_user_brands` | `GET /api/v1/instagram/user/brands` | `query.username` |
+| 用户top10 hashtag互动数据 | `instagram_user_hashtag_engagement` | `GET /api/v1/instagram/user/hashtag/engagement` | `query.username` |
+| 用户信息 | `instagram_db_user_info` | `GET /api/v1/instagram/user/info` | `query.username` |
+| 用户贴文 | `instagram_db_user_medias` | `GET /api/v1/instagram/user/medias` | `query.username` |
+| 相似用户推荐 | `instagram_user_similar` | `GET /api/v1/instagram/user/similar` | `query.username` |
+| 搜索instagram帖文 | `search_instagram_media` | `POST /api/v1/search/instagram/media` | `body.query` |
+| 搜索instagram用户 | `search_instagram_user` | `POST /api/v1/search/instagram/user` | `body.query` |
+
+### Cross-platform
+
+| Capability | operationId | Interface | Minimum input |
+|---|---|---|---|
+| ping | `ping` | `GET /api/ping` | `none` |
+| 搜索联想 | `search_instagram_suggest` | `POST /api/v1/search/suggest` | `query.platform, query.query` |
 
 ## Quick Start
 
-1. Confirm target platform, market, and campaign goal.
-2. Open `references/api-index.md` to select discovery and profile endpoints.
-3. Open `references/request-response.md` if request fields are unclear.
-4. Run calls via `scripts/execute_operation.py`.
-5. Return ranked candidates with reasons and next action.
+1. Confirm campaign objective, target market, and primary platform.
+2. Use the Capability Matrix to choose operationIds by platform and task.
+3. Check `references/request-response.md` for required params and response field layout.
+4. Run `scripts/execute_operation.py` calls and rank candidates with evidence.
 
 ## Workflow
 
-1. Define search intent:
-- Brand/category keywords
-- Geography/language
-- Creator scale and engagement threshold
-
-2. Run discovery first:
-- Use `search_*` operations to produce candidate pools.
-- Use pagination (`page`, `page_size`) for complete coverage.
-
-3. Enrich shortlisted creators:
-- Pull creator profile, content history, brand collab, hashtag engagement.
-- Expand nearby options with `*_user_similar`.
-
-4. Score and rank:
-- Rank by relevance, consistency, and partnership potential.
-- Keep ranking logic explicit in output.
+1. Build candidate pools first (`search_*`) and expand pagination for coverage.
+2. Enrich shortlisted creators (`*_db_user_info`, `*_db_user_videos`/`*_db_user_medias`, `*_user_similar`).
+3. Add partnership relevance signals (`*_user_brands`, `*_user_hashtag_engagement`) before ranking.
+4. Return a shortlist with explicit reasons, risks, and next actions.
 
 ## Tooling
 
@@ -41,7 +73,6 @@ Execution commands:
 - Filter by tag: `python3 scripts/execute_operation.py --env-file .env list --tag search`
 - Example search: `python3 scripts/execute_operation.py --env-file .env call --operation search_tiktok_user --body '{"query":"nike","page":1,"page_size":10}'`
 - Example enrich: `python3 scripts/execute_operation.py --env-file .env call --operation tiktok_db_user_info --query '{"unique_id":"nike"}'`
-
 
 Required environment variables:
 - `SCRUMBALL_BASE_URL`: API gateway base URL
@@ -62,12 +93,12 @@ Always return:
 
 ## Failure Handling
 
-- If required IDs are missing, ask only for minimal fields.
+- If required IDs are missing, request only minimal fields from the user.
 - If no results, relax one filter at a time and report what changed.
-- If API fails, include failed operationId and retry suggestion.
+- If API fails, include failed `operationId` and retry guidance.
 
 ## References
 
-- `references/api-index.md`: endpoint inventory for this skill
-- `references/request-response.md`: required params and body hints
-- `references/operations.json`: operation metadata used by the script
+- `references/api-index.md`: full operation index + platform grouped index
+- `references/request-response.md`: request parameters + response top-level/data fields + minimal examples
+- `references/operations.json`: operation manifest used by `scripts/execute_operation.py`
