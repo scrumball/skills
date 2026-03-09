@@ -1,32 +1,58 @@
 ---
 name: influencer-realtime-enrichment
-description: Realtime data enrichment for creators and content. Use when users ask for up-to-date creator/content status, latest post or video details, realtime profile changes, or freshness-critical checks during active campaigns.
+description: Realtime creator/content enrichment across TikTok, Instagram, and YouTube. Use when users need freshness-critical profile/media/video details, latest content retrieval, or delta checks during active campaigns with explicit operationId mapping.
 ---
 
 # Influencer Realtime Enrichment
 
-Fetch fresh creator and content data when snapshot data is not enough.
+Fetch fresh creator and content data when snapshot data is not enough for current decisions.
+
+## Capability Matrix
+
+### YouTube
+
+| Capability | operationId | Interface | Minimum input |
+|---|---|---|---|
+| 实时采集-用户信息 | `youtube_realtime_user_info` | `GET /api/v1/youtube/realtime/user/info` | `query.anyOf(channel_id,username)` |
+| 实时采集-用户视频 | `youtube_realtime_user_videos` | `GET /api/v1/youtube/realtime/user/videos` | `query.channel_id` |
+| 实时采集-视频详情 | `youtube_realtime_video_detail` | `GET /api/v1/youtube/realtime/video/detail` | `query.video_id` |
+
+### TikTok
+
+| Capability | operationId | Interface | Minimum input |
+|---|---|---|---|
+| 实时采集-用户信息 | `tiktok_realtime_user_info` | `GET /api/v1/tiktok/realtime/user/info` | `query.anyOf(unique_id,user_id)` |
+| 实时采集-用户视频 | `tiktok_realtime_user_videos` | `GET /api/v1/tiktok/realtime/user/videos` | `query.uid` |
+| 实时采集-视频详情 | `tiktok_realtime_video_detail` | `GET /api/v1/tiktok/realtime/video/detail` | `query.video_id, query.region` |
+
+### Instagram
+
+| Capability | operationId | Interface | Minimum input |
+|---|---|---|---|
+| 实时采集-贴文详情 | `instagram_realtime_media_detail` | `GET /api/v1/instagram/realtime/media/detail` | `query.media_code` |
+| 实时采集-用户信息 | `instagram_realtime_user_info` | `GET /api/v1/instagram/realtime/user/info` | `query.anyOf(username,user_id)` |
+| 实时采集-用户贴文 | `instagram_realtime_user_medias` | `GET /api/v1/instagram/realtime/user/medias` | `query.user_id` |
+| 实时采集-用户故事 | `instagram_realtime_user_stories` | `GET /api/v1/instagram/realtime/user/stories` | `query.user_id` |
+
+### Cross-platform
+
+| Capability | operationId | Interface | Minimum input |
+|---|---|---|---|
+| `none` | `none` | `none` | `none` |
 
 ## Quick Start
 
-1. Confirm urgency and freshness expectation.
-2. Choose platform and object type (user/media/video/story).
-3. Call realtime endpoints from `references/api-index.md`.
-4. Compare against baseline assumptions and summarize deltas.
+1. Confirm freshness requirement and urgency window.
+2. Choose platform and target object type (user/media/video/story).
+3. Use matrix to select realtime detail/list endpoints.
+4. Return delta-oriented findings and campaign impact.
 
 ## Workflow
 
-1. Define enrichment target:
-- Creator-level: profile, recent posts/videos
-- Content-level: media/video detail
-
-2. Execute realtime retrieval:
-- Prioritize detail endpoints for decision-critical objects.
-- Use paginated pulls for recent content sets.
-
-3. Produce delta-oriented output:
-- Report what changed, not only raw payload.
-- Flag sudden spikes/drops and potential campaign impact.
+1. Define enrichment target: creator-level or content-level.
+2. Execute realtime retrieval with minimal required identifiers.
+3. Compare new payload against prior assumptions and summarize deltas.
+4. Flag impact and next monitoring action.
 
 ## Tooling
 
@@ -34,7 +60,6 @@ Execution commands:
 - List operations: `python3 scripts/execute_operation.py --env-file .env list`
 - Example user enrichment: `python3 scripts/execute_operation.py --env-file .env call --operation tiktok_realtime_user_info --query '{"unique_id":"nike"}'`
 - Example content enrichment: `python3 scripts/execute_operation.py --env-file .env call --operation youtube_realtime_video_detail --query '{"video_id":"dQw4w9WgXcQ"}'`
-
 
 Required environment variables:
 - `SCRUMBALL_BASE_URL`: API gateway base URL
@@ -50,17 +75,17 @@ Env loading:
 Always return:
 - `Freshness`: retrieval time and target object
 - `Key deltas`: metric-level differences vs prior expectation
-- `Impact`: why the delta matters for decision-making
+- `Impact`: why the delta matters for decisions
 - `Next step`: monitor, replace creator, or continue
 
 ## Failure Handling
 
 - If platform identifiers are missing, request minimal required ID.
 - If realtime endpoint returns no data, retry once and report fallback.
-- If user asks for historical trend, hand off to monitoring skill.
+- If user asks for long-range historical trend, hand off to monitoring skill.
 
 ## References
 
-- `references/api-index.md`
-- `references/request-response.md`
-- `references/operations.json`
+- `references/api-index.md`: full operation index + platform grouped index
+- `references/request-response.md`: request parameters + response top-level/data fields + minimal examples
+- `references/operations.json`: operation manifest used by `scripts/execute_operation.py`
