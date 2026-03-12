@@ -5,6 +5,10 @@
 
 # Private docs
 docs/
+!docs/
+!docs/task-map.md
+!docs/task-map.json
+!docs/follow-up-templates.md
 
 # Python cache
 __pycache__/

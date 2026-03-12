@@ -27,16 +27,47 @@ npx skills add scrumball/skills
 npx skills add scrumball/skills --skill <skill-name>
 ```
 
+一键初始化并校验连通性：
+
+```bash
+python3 scripts/scrumball_cli.py init
+```
+
+或者先复制环境模板：
+
+```bash
+cp .env.example .env
+python3 scripts/scrumball_cli.py doctor
+```
+
 本地快速验证（示例）：
 
 ```bash
+python3 scripts/scrumball_cli.py demo
+python3 scripts/scrumball_cli.py tasks
+python3 scripts/scrumball_cli.py demo --task lead.find-tiktok-creators --param query=nike
+python3 scripts/scrumball_cli.py demo --task lead.find-tiktok-creators --use-example --dry-run
 python3 skills/influencer-lead-discovery/scripts/execute_operation.py --env-file .env list
+python3 skills/influencer-lead-discovery/scripts/execute_operation.py --env-file .env doctor
 python3 skills/influencer-lead-discovery/scripts/execute_operation.py --env-file .env call --operation ping
 ```
 
 预期结果：
+- `init` 会写入 `.env`，并可立即执行 `/api/ping`。
+- `doctor` 会检查环境变量和连通性。
+- `tasks` 提供更完整的业务任务语义入口，不必先记 `operationId`。
+- `demo` 可以直接运行语义任务，但缺少必填参数时会先追问，不再静默套用示例值。
 - `list` 会输出可用 `operationId` 列表。
 - `call` 会返回包含 `ok/status/data` 的 JSON。
+
+## 🧩 首次使用建议
+
+1. 运行 `python3 scripts/scrumball_cli.py init`，填写 base URL 与 API key。
+2. 确认 `python3 scripts/scrumball_cli.py doctor` 返回 `"ok": true`。
+3. 运行 `python3 scripts/scrumball_cli.py tasks` 查看高层任务映射。
+4. 运行 `python3 scripts/scrumball_cli.py demo --task monitor.list-active-video-tasks` 或 `python3 scripts/scrumball_cli.py demo --task lead.find-tiktok-creators --param query=nike` 做快速验证。
+
+如果你是有意想跑文档里的示例 payload，请显式加上 `--use-example`。
 
 ## 🧭 Skill 选择矩阵
 
@@ -89,6 +120,21 @@ python3 skills/influencer-lead-discovery/scripts/execute_operation.py --env-file
   - Prompt: “列出活跃监控任务，并标出上次更新后的异常。”
   - 输出：任务状态汇总 + 异常清单 + 优化建议。
 
+## 🗺️ 高层任务语义层
+
+- 面向人的任务映射：`docs/task-map.md`
+- 面向 AI / 自动化的任务映射：`docs/task-map.json`
+- 缺参追问模板：`docs/follow-up-templates.md`
+
+推荐流程：
+
+1. 先从任务短语开始，例如 `lead.find-tiktok-creators`。
+2. 只追问任务映射里要求的最小标识字段。
+3. 首次调用优先用 `python3 scripts/scrumball_cli.py demo --task <task-id> ...`。
+4. 如果缺少必填参数，先按任务映射里的追问模板补齐，不要直接套示例值。
+5. 只有在你明确想用文档示例时，才加 `--use-example`。
+6. 只有在需要更细控制时，再切到原始 `operationId`。
+
 ## 🛠️ 常见报错排查
 
 | 报错 | 可能原因 | 处理方式 |
@@ -98,3 +144,8 @@ python3 skills/influencer-lead-discovery/scripts/execute_operation.py --env-file
 | `Missing required ...` | 缺少必填 query/body 字段 | 打开对应 skill 的 `request-response.md` 按必填字段补齐 |
 | `Unknown operationId` | operationId 拼写错误或 skill 用错 | 执行 `... execute_operation.py ... list` 获取合法 operationId |
 | `Network error` / DNS 错误 | 临时网络或网关不可达 | 重试后检查网络/VPN/网关状态 |
+
+补充文档：
+- `docs/task-map.md`：覆盖 86 个实用工作流的语义任务目录
+- `docs/task-map.json`：给 AI/脚本使用的同范围任务与追问映射
+- `docs/follow-up-templates.md`：缺参时可直接复用的短追问模板
