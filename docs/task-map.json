@@ -1,0 +1,1539 @@
+[
+  {
+    "id": "lead.suggest-search-terms",
+    "title": "Generate platform search suggestions",
+    "category": "lead",
+    "platform": "cross-platform",
+    "skill": "influencer-lead-discovery",
+    "summary": "Generate suggestion terms before running deeper creator or content searches.",
+    "operation": "search_instagram_suggest",
+    "parameter_mode": "body",
+    "required": [
+      "platform",
+      "query"
+    ],
+    "optional": [
+      "page",
+      "page_size"
+    ],
+    "example": {
+      "platform": "instagram",
+      "query": "nike",
+      "page": 1,
+      "page_size": 10
+    },
+    "missing_follow_up": "Which platform and keyword should I use for search suggestions?"
+  },
+  {
+    "id": "lead.check-instagram-hashtag-engagement",
+    "title": "Check Instagram hashtag engagement",
+    "category": "lead",
+    "platform": "instagram",
+    "skill": "influencer-lead-discovery",
+    "summary": "See which Instagram hashtags drive the creator's engagement.",
+    "operation": "instagram_user_hashtag_engagement",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "lead.find-instagram-creators",
+    "title": "Find Instagram creators by keyword",
+    "category": "lead",
+    "platform": "instagram",
+    "skill": "influencer-lead-discovery",
+    "summary": "Search Instagram creator candidates from a keyword, niche, or brand.",
+    "operation": "search_instagram_user",
+    "parameter_mode": "body",
+    "required": [
+      "query"
+    ],
+    "optional": [
+      "page",
+      "page_size"
+    ],
+    "example": {
+      "query": "nike",
+      "page": 1,
+      "page_size": 10
+    },
+    "missing_follow_up": "What keyword, brand, or niche should I search for?"
+  },
+  {
+    "id": "lead.find-instagram-media",
+    "title": "Find Instagram media by keyword",
+    "category": "lead",
+    "platform": "instagram",
+    "skill": "influencer-lead-discovery",
+    "summary": "Search Instagram posts or media for a keyword or topic.",
+    "operation": "search_instagram_media",
+    "parameter_mode": "body",
+    "required": [
+      "query"
+    ],
+    "optional": [
+      "page",
+      "page_size"
+    ],
+    "example": {
+      "query": "nike",
+      "page": 1,
+      "page_size": 10
+    },
+    "missing_follow_up": "What keyword, brand, or niche should I search for?"
+  },
+  {
+    "id": "lead.find-similar-instagram-creators",
+    "title": "Find creators similar to an Instagram handle",
+    "category": "lead",
+    "platform": "instagram",
+    "skill": "influencer-lead-discovery",
+    "summary": "Expand a shortlist from a known Instagram creator username.",
+    "operation": "instagram_user_similar",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "lead.list-instagram-brand-affinities",
+    "title": "List Instagram creator brand affinities",
+    "category": "lead",
+    "platform": "instagram",
+    "skill": "influencer-lead-discovery",
+    "summary": "Inspect which brands an Instagram creator has worked with or mentioned.",
+    "operation": "instagram_user_brands",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "lead.list-instagram-media",
+    "title": "List Instagram creator media",
+    "category": "lead",
+    "platform": "instagram",
+    "skill": "influencer-lead-discovery",
+    "summary": "Review stored Instagram posts for a creator.",
+    "operation": "instagram_db_user_medias",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "lead.lookup-instagram-profile",
+    "title": "Look up an Instagram creator profile",
+    "category": "lead",
+    "platform": "instagram",
+    "skill": "influencer-lead-discovery",
+    "summary": "Pull stored profile details for a known Instagram creator.",
+    "operation": "instagram_db_user_info",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "lead.check-tiktok-hashtag-engagement",
+    "title": "Check TikTok hashtag engagement",
+    "category": "lead",
+    "platform": "tiktok",
+    "skill": "influencer-lead-discovery",
+    "summary": "See which TikTok hashtags drive the creator's engagement.",
+    "operation": "tiktok_user_hashtag_engagement",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "lead.find-similar-tiktok-creators",
+    "title": "Find creators similar to a TikTok handle",
+    "category": "lead",
+    "platform": "tiktok",
+    "skill": "influencer-lead-discovery",
+    "summary": "Expand a shortlist from a known TikTok creator handle.",
+    "operation": "tiktok_user_similar",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use as the seed creator?"
+  },
+  {
+    "id": "lead.find-tiktok-creators",
+    "title": "Find TikTok creators by keyword",
+    "category": "lead",
+    "platform": "tiktok",
+    "skill": "influencer-lead-discovery",
+    "summary": "Search TikTok creator candidates from a keyword, niche, or brand.",
+    "operation": "search_tiktok_user",
+    "parameter_mode": "body",
+    "required": [
+      "query"
+    ],
+    "optional": [
+      "page",
+      "page_size"
+    ],
+    "example": {
+      "query": "nike",
+      "page": 1,
+      "page_size": 10
+    },
+    "missing_follow_up": "What keyword, brand, or niche should I search for?"
+  },
+  {
+    "id": "lead.find-tiktok-videos",
+    "title": "Find TikTok videos by keyword",
+    "category": "lead",
+    "platform": "tiktok",
+    "skill": "influencer-lead-discovery",
+    "summary": "Search TikTok videos tied to a keyword, trend, or brand topic.",
+    "operation": "search_tiktok_video",
+    "parameter_mode": "body",
+    "required": [
+      "query"
+    ],
+    "optional": [
+      "page",
+      "page_size"
+    ],
+    "example": {
+      "query": "nike",
+      "page": 1,
+      "page_size": 10
+    },
+    "missing_follow_up": "What keyword, brand, or niche should I search for?"
+  },
+  {
+    "id": "lead.list-tiktok-brand-affinities",
+    "title": "List TikTok creator brand affinities",
+    "category": "lead",
+    "platform": "tiktok",
+    "skill": "influencer-lead-discovery",
+    "summary": "Inspect which brands a TikTok creator has worked with or mentioned.",
+    "operation": "tiktok_user_brands",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "lead.list-tiktok-videos",
+    "title": "List TikTok creator videos",
+    "category": "lead",
+    "platform": "tiktok",
+    "skill": "influencer-lead-discovery",
+    "summary": "Review stored TikTok video history for a creator.",
+    "operation": "tiktok_db_user_videos",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "lead.lookup-tiktok-profile",
+    "title": "Look up a TikTok creator profile",
+    "category": "lead",
+    "platform": "tiktok",
+    "skill": "influencer-lead-discovery",
+    "summary": "Pull stored profile details for a known TikTok creator.",
+    "operation": "tiktok_db_user_info",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "lead.check-youtube-hashtag-engagement",
+    "title": "Check YouTube hashtag engagement",
+    "category": "lead",
+    "platform": "youtube",
+    "skill": "influencer-lead-discovery",
+    "summary": "See which YouTube hashtags drive the creator's engagement.",
+    "operation": "youtube_user_hashtag_engagement",
+    "parameter_mode": "query",
+    "required": [
+      "channel_id"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id should I use?"
+  },
+  {
+    "id": "lead.find-similar-youtube-creators",
+    "title": "Find creators similar to a YouTube channel",
+    "category": "lead",
+    "platform": "youtube",
+    "skill": "influencer-lead-discovery",
+    "summary": "Expand a shortlist from a known YouTube channel.",
+    "operation": "youtube_user_similar",
+    "parameter_mode": "query",
+    "required_any": [
+      "channel_id",
+      "channel_handle"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id or channel_handle should I use as the seed creator?"
+  },
+  {
+    "id": "lead.find-youtube-creators",
+    "title": "Find YouTube creators by keyword",
+    "category": "lead",
+    "platform": "youtube",
+    "skill": "influencer-lead-discovery",
+    "summary": "Search YouTube creator candidates from a keyword, niche, or brand.",
+    "operation": "search_youtube_user",
+    "parameter_mode": "body",
+    "required": [
+      "query"
+    ],
+    "optional": [
+      "page",
+      "page_size"
+    ],
+    "example": {
+      "query": "nike",
+      "page": 1,
+      "page_size": 10
+    },
+    "missing_follow_up": "What keyword, brand, or niche should I search for?"
+  },
+  {
+    "id": "lead.find-youtube-videos",
+    "title": "Find YouTube videos by keyword",
+    "category": "lead",
+    "platform": "youtube",
+    "skill": "influencer-lead-discovery",
+    "summary": "Search YouTube videos tied to a keyword, trend, or brand topic.",
+    "operation": "search_youtube_video",
+    "parameter_mode": "body",
+    "required": [
+      "query"
+    ],
+    "optional": [
+      "page",
+      "page_size"
+    ],
+    "example": {
+      "query": "nike",
+      "page": 1,
+      "page_size": 10
+    },
+    "missing_follow_up": "What keyword, brand, or niche should I search for?"
+  },
+  {
+    "id": "lead.list-youtube-brand-affinities",
+    "title": "List YouTube creator brand affinities",
+    "category": "lead",
+    "platform": "youtube",
+    "skill": "influencer-lead-discovery",
+    "summary": "Inspect which brands a YouTube creator has worked with or mentioned.",
+    "operation": "youtube_user_brands",
+    "parameter_mode": "query",
+    "required": [
+      "channel_id"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id should I use?"
+  },
+  {
+    "id": "lead.list-youtube-videos",
+    "title": "List YouTube creator videos",
+    "category": "lead",
+    "platform": "youtube",
+    "skill": "influencer-lead-discovery",
+    "summary": "Review stored YouTube video history for a creator.",
+    "operation": "youtube_db_user_videos",
+    "parameter_mode": "query",
+    "required": [
+      "channel_id"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id should I use?"
+  },
+  {
+    "id": "lead.lookup-youtube-profile",
+    "title": "Look up a YouTube creator profile",
+    "category": "lead",
+    "platform": "youtube",
+    "skill": "influencer-lead-discovery",
+    "summary": "Pull stored profile details for a known YouTube creator.",
+    "operation": "youtube_db_user_info",
+    "parameter_mode": "query",
+    "required_any": [
+      "channel_id",
+      "username"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id or username should I use?"
+  },
+  {
+    "id": "audience.check-instagram-fit",
+    "title": "Check Instagram audience fit",
+    "category": "audience",
+    "platform": "instagram",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Start audience-fit analysis for an Instagram creator with geography as the first pull.",
+    "operation": "audience_instagram_geography",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "starter_operations": [
+      "audience_instagram_geography",
+      "audience_instagram_age",
+      "audience_instagram_gender",
+      "audience_instagram_language",
+      "audience_instagram_follower_authenticity"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I score for audience fit?"
+  },
+  {
+    "id": "audience.instagram-age",
+    "title": "Check Instagram audience age split",
+    "category": "audience",
+    "platform": "instagram",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience age split view for a Instagram creator.",
+    "operation": "audience_instagram_age",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "audience.instagram-brand-opportunities",
+    "title": "Check Instagram brand opportunity fit",
+    "category": "audience",
+    "platform": "instagram",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the brand opportunity fit view for a Instagram creator.",
+    "operation": "audience_instagram_brand_opportunities",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "audience.instagram-content-style",
+    "title": "Check Instagram content style",
+    "category": "audience",
+    "platform": "instagram",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the content style view for a Instagram creator.",
+    "operation": "audience_instagram_content_style",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "audience.instagram-devices",
+    "title": "Check Instagram audience devices",
+    "category": "audience",
+    "platform": "instagram",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull audience device usage for a Instagram creator.",
+    "operation": "audience_instagram_device",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "audience.instagram-engagement-behavior",
+    "title": "Check Instagram audience engagement behavior",
+    "category": "audience",
+    "platform": "instagram",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience engagement behavior view for a Instagram creator.",
+    "operation": "audience_instagram_interactive_behavior",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "audience.instagram-follower-authenticity",
+    "title": "Check Instagram follower authenticity",
+    "category": "audience",
+    "platform": "instagram",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the follower authenticity view for a Instagram creator.",
+    "operation": "audience_instagram_follower_authenticity",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "audience.instagram-gender",
+    "title": "Check Instagram audience gender split",
+    "category": "audience",
+    "platform": "instagram",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience gender split view for a Instagram creator.",
+    "operation": "audience_instagram_gender",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "audience.instagram-gender-overall",
+    "title": "Check Instagram overall audience gender split",
+    "category": "audience",
+    "platform": "instagram",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the overall audience gender split view for a Instagram creator.",
+    "operation": "audience_instagram_gender_overall",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "audience.instagram-geography",
+    "title": "Check Instagram audience geography",
+    "category": "audience",
+    "platform": "instagram",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience geography view for a Instagram creator.",
+    "operation": "audience_instagram_geography",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "audience.instagram-interests",
+    "title": "Check Instagram audience interests",
+    "category": "audience",
+    "platform": "instagram",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience interests view for a Instagram creator.",
+    "operation": "audience_instagram_interest",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "audience.instagram-language",
+    "title": "Check Instagram audience language",
+    "category": "audience",
+    "platform": "instagram",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience language view for a Instagram creator.",
+    "operation": "audience_instagram_language",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "audience.instagram-rating-tier",
+    "title": "Check Instagram rating tier",
+    "category": "audience",
+    "platform": "instagram",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the rating tier view for a Instagram creator.",
+    "operation": "audience_instagram_rating_tier",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "audience.check-tiktok-fit",
+    "title": "Check TikTok audience fit",
+    "category": "audience",
+    "platform": "tiktok",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Start audience-fit analysis for a TikTok creator with geography as the first pull.",
+    "operation": "audience_tiktok_geography",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "starter_operations": [
+      "audience_tiktok_geography",
+      "audience_tiktok_age",
+      "audience_tiktok_gender",
+      "audience_tiktok_language",
+      "audience_tiktok_follower_authenticity"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I score for audience fit?"
+  },
+  {
+    "id": "audience.tiktok-age",
+    "title": "Check TikTok audience age split",
+    "category": "audience",
+    "platform": "tiktok",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience age split view for a TikTok creator.",
+    "operation": "audience_tiktok_age",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "audience.tiktok-brand-opportunities",
+    "title": "Check TikTok brand opportunity fit",
+    "category": "audience",
+    "platform": "tiktok",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the brand opportunity fit view for a TikTok creator.",
+    "operation": "audience_tiktok_brand_opportunities",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "audience.tiktok-content-style",
+    "title": "Check TikTok content style",
+    "category": "audience",
+    "platform": "tiktok",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the content style view for a TikTok creator.",
+    "operation": "audience_tiktok_content_style",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "audience.tiktok-devices",
+    "title": "Check TikTok audience devices",
+    "category": "audience",
+    "platform": "tiktok",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull audience device usage for a TikTok creator.",
+    "operation": "audience_tiktok_device",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "audience.tiktok-engagement-behavior",
+    "title": "Check TikTok audience engagement behavior",
+    "category": "audience",
+    "platform": "tiktok",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience engagement behavior view for a TikTok creator.",
+    "operation": "audience_tiktok_interactive_behavior",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "audience.tiktok-follower-authenticity",
+    "title": "Check TikTok follower authenticity",
+    "category": "audience",
+    "platform": "tiktok",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the follower authenticity view for a TikTok creator.",
+    "operation": "audience_tiktok_follower_authenticity",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "audience.tiktok-gender",
+    "title": "Check TikTok audience gender split",
+    "category": "audience",
+    "platform": "tiktok",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience gender split view for a TikTok creator.",
+    "operation": "audience_tiktok_gender",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "audience.tiktok-gender-overall",
+    "title": "Check TikTok overall audience gender split",
+    "category": "audience",
+    "platform": "tiktok",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the overall audience gender split view for a TikTok creator.",
+    "operation": "audience_tiktok_gender_overall",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "audience.tiktok-geography",
+    "title": "Check TikTok audience geography",
+    "category": "audience",
+    "platform": "tiktok",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience geography view for a TikTok creator.",
+    "operation": "audience_tiktok_geography",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "audience.tiktok-interests",
+    "title": "Check TikTok audience interests",
+    "category": "audience",
+    "platform": "tiktok",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience interests view for a TikTok creator.",
+    "operation": "audience_tiktok_interest",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "audience.tiktok-language",
+    "title": "Check TikTok audience language",
+    "category": "audience",
+    "platform": "tiktok",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience language view for a TikTok creator.",
+    "operation": "audience_tiktok_language",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "audience.tiktok-rating-tier",
+    "title": "Check TikTok rating tier",
+    "category": "audience",
+    "platform": "tiktok",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the rating tier view for a TikTok creator.",
+    "operation": "audience_tiktok_rating_tier",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "audience.check-youtube-fit",
+    "title": "Check YouTube audience fit",
+    "category": "audience",
+    "platform": "youtube",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Start audience-fit analysis for a YouTube creator with geography as the first pull.",
+    "operation": "audience_youtube_geography",
+    "parameter_mode": "query",
+    "required": [
+      "channel_id"
+    ],
+    "starter_operations": [
+      "audience_youtube_geography",
+      "audience_youtube_age",
+      "audience_youtube_gender",
+      "audience_youtube_language",
+      "audience_youtube_follower_authenticity"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id should I score for audience fit?"
+  },
+  {
+    "id": "audience.youtube-age",
+    "title": "Check YouTube audience age split",
+    "category": "audience",
+    "platform": "youtube",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience age split view for a YouTube creator.",
+    "operation": "audience_youtube_age",
+    "parameter_mode": "query",
+    "required": [
+      "channel_id"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id should I use?"
+  },
+  {
+    "id": "audience.youtube-brand-opportunities",
+    "title": "Check YouTube brand opportunity fit",
+    "category": "audience",
+    "platform": "youtube",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the brand opportunity fit view for a YouTube creator.",
+    "operation": "audience_youtube_brand_opportunities",
+    "parameter_mode": "query",
+    "required": [
+      "channel_id"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id should I use?"
+  },
+  {
+    "id": "audience.youtube-content-style",
+    "title": "Check YouTube content style",
+    "category": "audience",
+    "platform": "youtube",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the content style view for a YouTube creator.",
+    "operation": "audience_youtube_content_style",
+    "parameter_mode": "query",
+    "required": [
+      "channel_id"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id should I use?"
+  },
+  {
+    "id": "audience.youtube-engagement-behavior",
+    "title": "Check YouTube audience engagement behavior",
+    "category": "audience",
+    "platform": "youtube",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience engagement behavior view for a YouTube creator.",
+    "operation": "audience_youtube_interactive_behavior",
+    "parameter_mode": "query",
+    "required": [
+      "channel_id"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id should I use?"
+  },
+  {
+    "id": "audience.youtube-follower-authenticity",
+    "title": "Check YouTube follower authenticity",
+    "category": "audience",
+    "platform": "youtube",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the follower authenticity view for a YouTube creator.",
+    "operation": "audience_youtube_follower_authenticity",
+    "parameter_mode": "query",
+    "required": [
+      "channel_id"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id should I use?"
+  },
+  {
+    "id": "audience.youtube-gender",
+    "title": "Check YouTube audience gender split",
+    "category": "audience",
+    "platform": "youtube",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience gender split view for a YouTube creator.",
+    "operation": "audience_youtube_gender",
+    "parameter_mode": "query",
+    "required": [
+      "channel_id"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id should I use?"
+  },
+  {
+    "id": "audience.youtube-gender-overall",
+    "title": "Check YouTube overall audience gender split",
+    "category": "audience",
+    "platform": "youtube",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the overall audience gender split view for a YouTube creator.",
+    "operation": "audience_youtube_gender_overall",
+    "parameter_mode": "query",
+    "required": [
+      "channel_id"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id should I use?"
+  },
+  {
+    "id": "audience.youtube-geography",
+    "title": "Check YouTube audience geography",
+    "category": "audience",
+    "platform": "youtube",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience geography view for a YouTube creator.",
+    "operation": "audience_youtube_geography",
+    "parameter_mode": "query",
+    "required": [
+      "channel_id"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id should I use?"
+  },
+  {
+    "id": "audience.youtube-interests",
+    "title": "Check YouTube audience interests",
+    "category": "audience",
+    "platform": "youtube",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience interests view for a YouTube creator.",
+    "operation": "audience_youtube_interest",
+    "parameter_mode": "query",
+    "required": [
+      "channel_id"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id should I use?"
+  },
+  {
+    "id": "audience.youtube-language",
+    "title": "Check YouTube audience language",
+    "category": "audience",
+    "platform": "youtube",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the audience language view for a YouTube creator.",
+    "operation": "audience_youtube_language",
+    "parameter_mode": "query",
+    "required": [
+      "channel_id"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id should I use?"
+  },
+  {
+    "id": "audience.youtube-rating-tier",
+    "title": "Check YouTube rating tier",
+    "category": "audience",
+    "platform": "youtube",
+    "skill": "influencer-audience-fit-scoring",
+    "summary": "Pull the rating tier view for a YouTube creator.",
+    "operation": "audience_youtube_rating_tier",
+    "parameter_mode": "query",
+    "required": [
+      "channel_id"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id should I use?"
+  },
+  {
+    "id": "realtime.list-instagram-media",
+    "title": "Pull fresh Instagram media",
+    "category": "realtime",
+    "platform": "instagram",
+    "skill": "influencer-realtime-enrichment",
+    "summary": "Fetch the latest Instagram posts for a creator by user_id.",
+    "operation": "instagram_realtime_user_medias",
+    "parameter_mode": "query",
+    "required": [
+      "user_id"
+    ],
+    "example": {
+      "user_id": "1234567890"
+    },
+    "missing_follow_up": "What user_id should I use?"
+  },
+  {
+    "id": "realtime.list-instagram-stories",
+    "title": "Pull fresh Instagram stories",
+    "category": "realtime",
+    "platform": "instagram",
+    "skill": "influencer-realtime-enrichment",
+    "summary": "Fetch current Instagram stories for a creator by user_id.",
+    "operation": "instagram_realtime_user_stories",
+    "parameter_mode": "query",
+    "required": [
+      "user_id"
+    ],
+    "example": {
+      "user_id": "1234567890"
+    },
+    "missing_follow_up": "What user_id should I use?"
+  },
+  {
+    "id": "realtime.lookup-instagram-media",
+    "title": "Pull fresh Instagram media detail",
+    "category": "realtime",
+    "platform": "instagram",
+    "skill": "influencer-realtime-enrichment",
+    "summary": "Fetch current details for a specific Instagram media item.",
+    "operation": "instagram_realtime_media_detail",
+    "parameter_mode": "query",
+    "required": [
+      "media_code"
+    ],
+    "example": {
+      "media_code": "Cxyz123ABC"
+    },
+    "missing_follow_up": "What Instagram media_code should I inspect?"
+  },
+  {
+    "id": "realtime.lookup-instagram-profile",
+    "title": "Pull fresh Instagram profile info",
+    "category": "realtime",
+    "platform": "instagram",
+    "skill": "influencer-realtime-enrichment",
+    "summary": "Fetch the latest Instagram creator profile using username or user_id.",
+    "operation": "instagram_realtime_user_info",
+    "parameter_mode": "query",
+    "required_any": [
+      "username",
+      "user_id"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username or user_id should I use?"
+  },
+  {
+    "id": "realtime.list-tiktok-videos",
+    "title": "Pull fresh TikTok videos",
+    "category": "realtime",
+    "platform": "tiktok",
+    "skill": "influencer-realtime-enrichment",
+    "summary": "Fetch the latest TikTok video list for a creator by uid.",
+    "operation": "tiktok_realtime_user_videos",
+    "parameter_mode": "query",
+    "required": [
+      "uid"
+    ],
+    "example": {
+      "uid": "1234567890"
+    },
+    "missing_follow_up": "What platform uid should I use?"
+  },
+  {
+    "id": "realtime.lookup-tiktok-profile",
+    "title": "Pull fresh TikTok profile info",
+    "category": "realtime",
+    "platform": "tiktok",
+    "skill": "influencer-realtime-enrichment",
+    "summary": "Fetch the latest TikTok creator profile using either handle or user_id.",
+    "operation": "tiktok_realtime_user_info",
+    "parameter_mode": "query",
+    "required_any": [
+      "unique_id",
+      "user_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or user_id should I use for the realtime profile lookup?"
+  },
+  {
+    "id": "realtime.lookup-tiktok-video",
+    "title": "Pull fresh TikTok video info",
+    "category": "realtime",
+    "platform": "tiktok",
+    "skill": "influencer-realtime-enrichment",
+    "summary": "Fetch current details for a specific TikTok video in a target region.",
+    "operation": "tiktok_realtime_video_detail",
+    "parameter_mode": "query",
+    "required": [
+      "video_id",
+      "region"
+    ],
+    "example": {
+      "video_id": "dQw4w9WgXcQ",
+      "region": "US"
+    },
+    "missing_follow_up": "What TikTok video_id and region code should I use?"
+  },
+  {
+    "id": "realtime.list-youtube-videos",
+    "title": "Pull fresh YouTube videos",
+    "category": "realtime",
+    "platform": "youtube",
+    "skill": "influencer-realtime-enrichment",
+    "summary": "Fetch the latest YouTube video list for a channel.",
+    "operation": "youtube_realtime_user_videos",
+    "parameter_mode": "query",
+    "required": [
+      "channel_id"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id should I use?"
+  },
+  {
+    "id": "realtime.lookup-youtube-profile",
+    "title": "Pull fresh YouTube channel info",
+    "category": "realtime",
+    "platform": "youtube",
+    "skill": "influencer-realtime-enrichment",
+    "summary": "Fetch the latest YouTube channel profile using channel_id or username.",
+    "operation": "youtube_realtime_user_info",
+    "parameter_mode": "query",
+    "required_any": [
+      "channel_id",
+      "username"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id or username should I use?"
+  },
+  {
+    "id": "realtime.lookup-youtube-video",
+    "title": "Pull fresh YouTube video info",
+    "category": "realtime",
+    "platform": "youtube",
+    "skill": "influencer-realtime-enrichment",
+    "summary": "Fetch current details for a specific YouTube video.",
+    "operation": "youtube_realtime_video_detail",
+    "parameter_mode": "query",
+    "required": [
+      "video_id"
+    ],
+    "example": {
+      "video_id": "dQw4w9WgXcQ"
+    },
+    "missing_follow_up": "What video_id should I inspect?"
+  },
+  {
+    "id": "monitor.create-video-task",
+    "title": "Create a video monitor task",
+    "category": "monitor",
+    "platform": "cross-platform",
+    "skill": "influencer-campaign-monitoring",
+    "summary": "Start a new cross-platform video monitoring task.",
+    "operation": "create_monitor_task",
+    "parameter_mode": "body",
+    "required": [
+      "platform",
+      "video_id"
+    ],
+    "example": {
+      "platform": "tiktok",
+      "video_id": "dQw4w9WgXcQ"
+    },
+    "missing_follow_up": "Which platform and video_id should I use for the monitor task?"
+  },
+  {
+    "id": "monitor.list-active-video-tasks",
+    "title": "List active video monitor tasks",
+    "category": "monitor",
+    "platform": "cross-platform",
+    "skill": "influencer-campaign-monitoring",
+    "summary": "Check current video monitoring tasks without needing a raw operationId.",
+    "operation": "list_monitor_tasks",
+    "parameter_mode": "query",
+    "example": {},
+    "missing_follow_up": "No extra identifiers are required for this task."
+  },
+  {
+    "id": "monitor.lookup-video-task",
+    "title": "Look up one monitor task",
+    "category": "monitor",
+    "platform": "cross-platform",
+    "skill": "influencer-campaign-monitoring",
+    "summary": "Fetch status and detail for an existing monitor task.",
+    "operation": "get_monitor_task_detail",
+    "parameter_mode": "query",
+    "required": [
+      "monitor_id"
+    ],
+    "example": {
+      "monitor_id": "123"
+    },
+    "missing_follow_up": "What monitor_id should I use?"
+  },
+  {
+    "id": "monitor.refresh-video-task",
+    "title": "Refresh one monitor task",
+    "category": "monitor",
+    "platform": "cross-platform",
+    "skill": "influencer-campaign-monitoring",
+    "summary": "Refresh an existing monitoring task by monitor_id.",
+    "operation": "refresh_monitor_task",
+    "parameter_mode": "query",
+    "required": [
+      "monitor_id"
+    ],
+    "example": {
+      "monitor_id": "123"
+    },
+    "missing_follow_up": "What monitor_id should I use?"
+  },
+  {
+    "id": "monitor.stop-video-task",
+    "title": "Stop a video monitor task",
+    "category": "monitor",
+    "platform": "cross-platform",
+    "skill": "influencer-campaign-monitoring",
+    "summary": "Stop an existing monitor task by monitor_id.",
+    "operation": "stop_monitor_task",
+    "parameter_mode": "query",
+    "required": [
+      "monitor_id"
+    ],
+    "example": {
+      "monitor_id": "123"
+    },
+    "missing_follow_up": "What monitor_id should I use?"
+  },
+  {
+    "id": "monitor.download-instagram-task-video",
+    "title": "Download an Instagram monitored video",
+    "category": "monitor",
+    "platform": "instagram",
+    "skill": "influencer-campaign-monitoring",
+    "summary": "Download an Instagram video asset tied to a monitored task.",
+    "operation": "instagram_task_video_download",
+    "parameter_mode": "query",
+    "required": [
+      "video_code"
+    ],
+    "example": {
+      "video_code": "Cxyz123ABC"
+    },
+    "missing_follow_up": "What Instagram video_code should I use?"
+  },
+  {
+    "id": "monitor.lookup-instagram-user-metrics",
+    "title": "Check Instagram monitored user metrics",
+    "category": "monitor",
+    "platform": "instagram",
+    "skill": "influencer-campaign-monitoring",
+    "summary": "Pull monitoring metrics for an Instagram creator account.",
+    "operation": "instagram_user_monitor_metrics",
+    "parameter_mode": "query",
+    "required": [
+      "username"
+    ],
+    "example": {
+      "username": "nike"
+    },
+    "missing_follow_up": "What Instagram username should I use?"
+  },
+  {
+    "id": "monitor.download-tiktok-task-video",
+    "title": "Download a TikTok monitored video",
+    "category": "monitor",
+    "platform": "tiktok",
+    "skill": "influencer-campaign-monitoring",
+    "summary": "Download a TikTok video asset tied to a monitored task.",
+    "operation": "tiktok_task_video_download",
+    "parameter_mode": "query",
+    "required": [
+      "video_id"
+    ],
+    "example": {
+      "video_id": "dQw4w9WgXcQ"
+    },
+    "missing_follow_up": "What video_id should I inspect?"
+  },
+  {
+    "id": "monitor.lookup-tiktok-user-metrics",
+    "title": "Check TikTok monitored user metrics",
+    "category": "monitor",
+    "platform": "tiktok",
+    "skill": "influencer-campaign-monitoring",
+    "summary": "Pull monitoring metrics for a TikTok creator account.",
+    "operation": "tiktok_user_monitor_metrics",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "monitor.download-youtube-task-video",
+    "title": "Download a YouTube monitored video",
+    "category": "monitor",
+    "platform": "youtube",
+    "skill": "influencer-campaign-monitoring",
+    "summary": "Download a YouTube video asset tied to a monitored task.",
+    "operation": "youtube_task_video_download",
+    "parameter_mode": "query",
+    "required": [
+      "video_id"
+    ],
+    "example": {
+      "video_id": "dQw4w9WgXcQ"
+    },
+    "missing_follow_up": "What video_id should I inspect?"
+  },
+  {
+    "id": "monitor.lookup-youtube-user-metrics",
+    "title": "Check YouTube monitored user metrics",
+    "category": "monitor",
+    "platform": "youtube",
+    "skill": "influencer-campaign-monitoring",
+    "summary": "Pull monitoring metrics for a YouTube creator account.",
+    "operation": "youtube_user_monitor_metrics",
+    "parameter_mode": "query",
+    "required": [
+      "channel_id"
+    ],
+    "example": {
+      "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "missing_follow_up": "What YouTube channel_id should I use?"
+  },
+  {
+    "id": "commerce.list-tiktok-shop-goods",
+    "title": "List TikTok shop goods for a creator",
+    "category": "commerce",
+    "platform": "tiktok",
+    "skill": "influencer-commerce-intel",
+    "summary": "Inspect a creator's TikTok shop catalog by unique_id.",
+    "operation": "tiktok_user_shop_goods_list",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "optional": [
+      "page"
+    ],
+    "example": {
+      "unique_id": "nike",
+      "page": 1
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "commerce.list-tiktok-shop-lives",
+    "title": "List TikTok shop live sessions",
+    "category": "commerce",
+    "platform": "tiktok",
+    "skill": "influencer-commerce-intel",
+    "summary": "Inspect a creator's TikTok shop live selling sessions.",
+    "operation": "tiktok_user_shop_live_list",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "commerce.list-tiktok-shop-video-ads",
+    "title": "List TikTok shop video ads",
+    "category": "commerce",
+    "platform": "tiktok",
+    "skill": "influencer-commerce-intel",
+    "summary": "Inspect a creator's TikTok shop video ads.",
+    "operation": "tiktok_user_shop_video_ad_list",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  },
+  {
+    "id": "commerce.lookup-product-detail",
+    "title": "Check TikTok product detail",
+    "category": "commerce",
+    "platform": "tiktok",
+    "skill": "influencer-commerce-intel",
+    "summary": "Fetch realtime details for a TikTok product in a target region.",
+    "operation": "tiktok_realtime_product_detail",
+    "parameter_mode": "query",
+    "required": [
+      "product_id",
+      "region"
+    ],
+    "example": {
+      "product_id": "1731491957866860552",
+      "region": "US"
+    },
+    "missing_follow_up": "What product_id and region code should I use for the TikTok product lookup?"
+  },
+  {
+    "id": "commerce.lookup-tiktok-shop-sales",
+    "title": "Check TikTok shop sales",
+    "category": "commerce",
+    "platform": "tiktok",
+    "skill": "influencer-commerce-intel",
+    "summary": "Inspect a creator's TikTok shop sales performance.",
+    "operation": "tiktok_user_shop_sale",
+    "parameter_mode": "query",
+    "required": [
+      "unique_id"
+    ],
+    "example": {
+      "unique_id": "nike"
+    },
+    "missing_follow_up": "What TikTok unique_id or handle should I use?"
+  }
+]

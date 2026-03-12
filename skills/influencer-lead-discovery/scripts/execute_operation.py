@@ -13,6 +13,20 @@ from typing import Any, Dict
 
 OPERATIONS_PATH = Path(__file__).resolve().parents[1] / "references" / "operations.json"
 SKILL_ROOT = Path(__file__).resolve().parents[1]
+FOLLOW_UP_HINTS = {
+    "channel_id": "What YouTube channel_id should I use?",
+    "media_code": "What Instagram media_code should I use?",
+    "monitor_id": "What monitor_id should I use?",
+    "product_id": "What TikTok product_id should I use?",
+    "query": "What keyword, brand, or niche should I search for?",
+    "region": "Which region code should I use, for example US?",
+    "uid": "What platform uid should I use?",
+    "unique_id": "What TikTok unique_id or handle should I use?",
+    "user_id": "What user_id should I use?",
+    "username": "What username should I use?",
+    "video_code": "What Instagram video_code should I use?",
+    "video_id": "What video_id should I use?",
+}
 
 
 def load_operations() -> Dict[str, Dict[str, Any]]:
@@ -39,10 +53,23 @@ def apply_path_params(path: str, path_params: Dict[str, Any]) -> str:
     return rendered
 
 
+def build_follow_up(required: list[str], any_of: bool = False) -> str:
+    if not required:
+        return ""
+    if any_of:
+        joined = ", ".join(required)
+        example = FOLLOW_UP_HINTS.get(required[0], f"What {required[0]} should I use?")
+        return f" Follow-up: ask for any one of {joined}. Example: {example}"
+    prompts = [FOLLOW_UP_HINTS.get(name, f"What {name} should I use?") for name in required]
+    if len(prompts) == 1:
+        return f" Follow-up: ask the user: {prompts[0]}"
+    return " Follow-up: ask for these fields: " + " | ".join(prompts)
+
+
 def validate_required(required: list[str], payload: Dict[str, Any], label: str) -> None:
     missing = [k for k in required if k not in payload or payload[k] in (None, "")]
     if missing:
-        raise ValueError(f"Missing required {label}: {', '.join(missing)}")
+        raise ValueError(f"Missing required {label}: {', '.join(missing)}.{build_follow_up(missing)}")
 
 
 def validate_required_any(required_any: list[str], payload: Dict[str, Any], label: str) -> None:
@@ -50,7 +77,8 @@ def validate_required_any(required_any: list[str], payload: Dict[str, Any], labe
         return
     present = any(k in payload and payload[k] not in (None, "") for k in required_any)
     if not present:
-        raise ValueError(f"Missing required {label}: at least one of {', '.join(required_any)}")
+        joined = ", ".join(required_any)
+        raise ValueError(f"Missing required {label}: at least one of {joined}.{build_follow_up(required_any, any_of=True)}")
 
 
 def auth_header_value(api_key: str) -> str:
@@ -72,26 +100,25 @@ def load_env_file(path: Path) -> None:
         if not key:
             continue
         val = v.strip().strip('"').strip("'")
-        # Do not override already-exported env
         if key not in os.environ:
             os.environ[key] = val
 
 
-def resolve_and_load_env(env_file_arg: str | None) -> None:
+def resolve_and_load_env(env_file_arg: str | None) -> Path | None:
     candidates = []
     if env_file_arg:
         candidates.append(Path(env_file_arg).expanduser())
     elif os.getenv("SCRUMBALL_ENV_FILE"):
         candidates.append(Path(os.getenv("SCRUMBALL_ENV_FILE", "")).expanduser())
     else:
-        # deterministic fallback for installed single-skill usage
         candidates.append(Path.cwd() / ".env")
         candidates.append(SKILL_ROOT / ".env")
 
     for p in candidates:
         if p.exists() and p.is_file():
             load_env_file(p)
-            break
+            return p
+    return None
 
 
 def call_operation(op: Dict[str, Any], query: Dict[str, Any], body: Dict[str, Any], headers: Dict[str, Any], path_params: Dict[str, Any]) -> Dict[str, Any]:
@@ -100,9 +127,9 @@ def call_operation(op: Dict[str, Any], query: Dict[str, Any], body: Dict[str, An
     timeout = int(os.getenv("SCRUMBALL_TIMEOUT_SECONDS", "30"))
 
     if not base_url:
-        raise ValueError("SCRUMBALL_BASE_URL is required")
+        raise ValueError("SCRUMBALL_BASE_URL is required. Follow-up: ask the user for the API gateway base URL or run scripts/scrumball_cli.py init")
     if not api_key:
-        raise ValueError("SCRUMBALL_API_KEY is required")
+        raise ValueError("SCRUMBALL_API_KEY is required. Follow-up: ask the user for the API key or run scripts/scrumball_cli.py init")
 
     validate_required(op.get("required_query", []), query, "query parameters")
     validate_required_any(op.get("required_any_query", []), query, "query parameters")
@@ -147,6 +174,49 @@ def call_operation(op: Dict[str, Any], query: Dict[str, Any], body: Dict[str, An
         raise ValueError(f"Network error: {e}") from e
 
 
+def default_ping_operation() -> Dict[str, Any]:
+    return {
+        "method": "GET",
+        "path": "/api/ping",
+        "summary": "ping",
+        "tags": ["health"],
+        "required_query": [],
+        "required_any_query": [],
+        "required_path": [],
+        "required_body": [],
+        "default_headers": {},
+    }
+
+
+def run_doctor(ops: Dict[str, Dict[str, Any]], skip_ping: bool, loaded_env: Path | None) -> int:
+    base_url = os.getenv("SCRUMBALL_BASE_URL", "").strip()
+    api_key = os.getenv("SCRUMBALL_API_KEY", "").strip()
+    result: Dict[str, Any] = {
+        "ok": bool(base_url and api_key),
+        "env_file": str(loaded_env) if loaded_env else None,
+        "base_url_configured": bool(base_url),
+        "api_key_configured": bool(api_key),
+        "base_url": base_url or None,
+        "auth_prefix": os.getenv("SCRUMBALL_AUTH_PREFIX", "").strip() or None,
+        "timeout_seconds": int(os.getenv("SCRUMBALL_TIMEOUT_SECONDS", "30")),
+    }
+
+    if skip_ping:
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0 if result["ok"] else 1
+
+    if result["ok"]:
+        ping_op = ops.get("ping", default_ping_operation())
+        try:
+            result["ping"] = call_operation(ping_op, {}, {}, {}, {})
+            result["ok"] = bool(result["ok"] and result["ping"].get("ok"))
+        except ValueError as exc:
+            result["ok"] = False
+            result["ping"] = {"ok": False, "error": str(exc)}
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0 if result["ok"] else 1
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run operations for this skill")
     parser.add_argument("--env-file", help="Optional .env file path; if omitted, auto-tries ./.env then <skill-root>/.env")
@@ -156,6 +226,9 @@ def main() -> int:
     p_list = sub.add_parser("list")
     p_list.add_argument("--tag")
 
+    p_doctor = sub.add_parser("doctor")
+    p_doctor.add_argument("--skip-ping", action="store_true")
+
     p_call = sub.add_parser("call")
     p_call.add_argument("--operation", required=True)
     p_call.add_argument("--query")
@@ -164,7 +237,7 @@ def main() -> int:
     p_call.add_argument("--path-params")
 
     args = parser.parse_args()
-    resolve_and_load_env(args.env_file)
+    loaded_env = resolve_and_load_env(args.env_file)
     ops = load_operations()
 
     if args.cmd == "list":
@@ -176,6 +249,9 @@ def main() -> int:
             print(f"{oid}\t{meta['method']}\t{meta['path']}\t{','.join(meta.get('tags') or [])}\t{meta.get('summary','')}")
         print(f"TOTAL\t{len(rows)}")
         return 0
+
+    if args.cmd == "doctor":
+        return run_doctor(ops, args.skip_ping, loaded_env)
 
     try:
         op = ops[args.operation]
