@@ -16,7 +16,11 @@ Scrumball is connected if the tool list contains any tool from these families, w
 - `employee_activity_overview`, `wallet_consumption`
 - `outreach_inbox_summary` and other `outreach_*` tools
 
-If some families are present but the one the user needs is missing, go to section 4 (missing capability). Never add a second Scrumball server when one is already connected.
+If some families are present but the one the user needs is missing, go to section 4 (missing capability).
+
+If no Scrumball tools are present, check the client's MCP server list before adding anything (Claude Code: `claude mcp list`; Codex: `codex mcp list`; Gemini CLI: `gemini mcp list`; Cursor / VS Code: the MCP settings). A server named like `scrumball…`, or one whose URL ends in `/mcp/server`, that shows "needs authentication", "failed" or "disconnected" means it is added but not signed in: go to section 3.
+
+Never add a second Scrumball server when one is already configured.
 
 ## 2. Add the server
 
