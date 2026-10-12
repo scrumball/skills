@@ -1,0 +1,12 @@
+{
+  "name": "scrumball",
+  "version": "2.0.0",
+  "description": "Scrumball influencer marketing platform for AI agents: creator search, outreach tasks, dashboard, inbox and usage statistics. Sign in with your Scrumball account; no API key needed.",
+  "author": {
+    "name": "Scrumball",
+    "email": "platform@scrumball.com"
+  },
+  "homepage": "https://github.com/scrumball/skills",
+  "license": "MIT",
+  "keywords": ["influencer marketing", "creator outreach", "KOL", "mcp", "scrumball"]
+}

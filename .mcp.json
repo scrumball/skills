@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "scrumball": {
+      "type": "http",
+      "url": "https://api.kolmasters.com/mcp/server"
+    }
+  }
+}

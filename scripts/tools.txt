@@ -1,0 +1,29 @@
+# Scrumball MCP 当前对外 tool 名单（scripts/check.py 用它校验 skill 里引用的 tool 名都真实存在）。
+# 服务端增删 tool 后同步更新本文件。
+activity_trend
+add_creators_to_collection
+check_creators_collected
+create_collection
+employee_activity_overview
+employee_ranking
+get_creator
+get_creator_posts
+get_quota_status
+list_collection_creators
+list_collections
+list_employees
+module_usage_stats
+outreach_dashboard_overview
+outreach_dashboard_trend
+outreach_inbox_get
+outreach_inbox_list
+outreach_inbox_messages
+outreach_inbox_summary
+outreach_task_contacts
+outreach_task_get
+outreach_task_get_step
+outreach_task_list
+remove_creators_from_collection
+search_creators
+unlock_creator_emails
+wallet_consumption
