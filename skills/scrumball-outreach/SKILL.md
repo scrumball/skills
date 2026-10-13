@@ -54,7 +54,7 @@ In `outreach_task_contacts`, `has_quote` is wider: the creator has a confirmed q
 
 ### Campaign performance — "how is this task doing"
 
-1. `outreach_dashboard_overview` with `task_ids`, and `days` (7 / 30 / 90) if the user named a recent period.
+1. `outreach_dashboard_overview` with `task_ids`, and `days` (7 / 30 / 90) if the user named a recent period. Its `tasks` list shows up to 20 tasks (`task_total` is the real count); for all tasks with their numbers use `outreach_task_list`, page by page.
 2. `outreach_dashboard_trend` (7 or 30 days). Each row is the group of contacts first emailed that day and how they responded so far — not replies received that day; recent days look low because replies are still coming in.
 3. Report the funnel and rates (all over delivered), compare tasks, and name the weak step: low opens → subject line; opens without replies → email copy; replies without cooperation → the offer. Quote the actual email copy from `outreach_task_get` / `outreach_task_get_step` when discussing why.
 4. For calendar-month comparisons ("this month vs last month"), use `activity_trend` from the `scrumball-stats` skill.

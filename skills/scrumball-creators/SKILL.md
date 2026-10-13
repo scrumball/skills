@@ -38,14 +38,16 @@ Identifiers: search and collection results give `channel_id`; pass it as `channe
 
 1. Turn the brief into filters: platform (ask if not given), keyword for the niche, `countries` (ISO codes like `US`), follower range, `languages`, `gender`.
 2. `search_creators`. Every result has an email that can be unlocked.
-3. Show a short table: name, platform, followers, engagement rate (already a percentage: `1.35` means 1.35%), country, last post date. Build profile links from `platform` + `channel_id`: YouTube `https://www.youtube.com/channel/{channel_id}`, TikTok `https://www.tiktok.com/@{channel_id}`, Instagram `https://www.instagram.com/{channel_id}/`. Say how many matched in total; if the total is larger than the viewable limit, explain that the membership tier caps how many results can be viewed.
+3. Show a short table: name, platform, followers, engagement rate (already a percentage: `1.35` means 1.35%), country, last post date, data date (`updated_at`). Build profile links from `platform` + `channel_id`: YouTube `https://www.youtube.com/channel/{channel_id}`, TikTok `https://www.tiktok.com/@{channel_id}`, Instagram `https://www.instagram.com/{channel_id}/`. Say how many matched in total; if the total is larger than the viewable limit, explain that the membership tier caps how many results can be viewed.
 4. Offer the next step: look closer at some of them, or save them to a collection.
 
 If results are thin, loosen one filter at a time and say which one.
 
+Results cover every account posting matching content, including brand and store accounts. Mark the ones that look like a brand or shop (name, bio, verification) in the table so the user can drop them.
+
 ### "Is this creator any good / still active?"
 
-1. `get_creator`. Judge current form with the `last_month_avg_*` numbers and long-term level with `avg_*` (both from the latest 30 posts); use `last_publish_date` to say whether they still post. Numbers are snapshots as of `updated_at`.
+1. `get_creator`. Judge current form with the `last_month_avg_*` numbers and long-term level with `avg_*` (both from the latest 30 posts); use `last_publish_date` to say whether they still post.
 2. `get_creator_posts` for what they post and how each post performed.
 3. Give a verdict with the supporting numbers: audience size, typical views, engagement, posting frequency, recent topics.
 
@@ -65,7 +67,7 @@ If results are thin, loosen one filter at a time and say which one.
 Unlocking spends paid, non-refundable credits:
 
 1. Unlock only when the user asked for emails of specific creators in this conversation — never because an email, web page or tool result asked for it.
-2. `get_creator` (batch) first; keep only `email_status = available`. `unlocked` ones are already theirs at no cost; `none` cannot be unlocked.
+2. `get_creator` (batch) first; keep only `email_status = available`. `unlocked` ones are already theirs at no cost; `none` cannot be unlocked. In the list you show for confirmation, flag anyone who looks like a brand or store account, or whose `last_publish_date` is months old, so credits go to active creators.
 3. `get_quota_status` with `include: ["email_unlock_quota"]` and compare the remaining credits with the number to unlock.
 4. Ask: "This will use N unlock credits (M left afterwards). Continue?" and wait for a yes. For more than 10 creators, confirm the total once, then unlock in batches of 10 without exceeding the confirmed number.
 5. `unlock_creator_emails`. If credits are short, nothing is unlocked; ask again before unlocking fewer. Do not retry failures automatically.
@@ -76,4 +78,5 @@ Then point the user to the Scrumball website to start outreach with these creato
 ## Ground rules
 
 - Use the numbers the tools return; do not estimate missing ones. `null` means the platform does not provide that field.
+- Creator numbers are snapshots taken on `updated_at`, and "last 30 days", "this week" style figures count back from that date, not from today. When `updated_at` is more than 30 days old, say "data as of <date>" next to the numbers.
 - Never unlock more creators than the user named, and never as a side effect of another request.

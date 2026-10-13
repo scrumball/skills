@@ -27,7 +27,9 @@ Most tools default to the last 30 days. `employee_ranking` and `activity_trend` 
 
 1. `employee_activity_overview` (no `operator_id` = everyone visible to this account).
 2. `module_usage_stats` with `group_by=operator` for the per-member breakdown (main account).
-3. Present a table, then two or three observations, for example who carried most of the outreach or who unlocked emails but sent nothing. A reply ratio here is `email_reply / email_send`, counted in emails; it is not the outreach dashboard's `reply_rate`, which counts people. Name it accordingly.
+3. Present a table, then two or three observations, for example who carried most of the outreach or who unlocked emails but sent nothing.
+
+What the outreach numbers mean: `email_send` counts outreach emails sent on every sending channel, follow-ups included, on the day each sequence step finished sending; `email_reply` counts contacts who replied, on the day of their latest reply. They count different things, so do not divide one by the other; for reply rates use `outreach_dashboard_overview` (`scrumball-outreach` skill). `active_days` counts days with unlocks, saves, task launches, emails sent or spending.
 
 ### "Who did the most / least?"
 
