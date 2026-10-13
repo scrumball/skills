@@ -30,6 +30,8 @@ Server URL (Streamable HTTP, OAuth sign-in):
 https://api.kolmasters.com/mcp/server
 ```
 
+If the environment variable `SCRUMBALL_MCP_URL` is set (check with `echo $SCRUMBALL_MCP_URL`; on Windows `echo %SCRUMBALL_MCP_URL%`), use its value instead of the URL above and tell the user which address you are using. Otherwise use the URL above.
+
 Use the server name `scrumball`. Ask the user before changing their configuration, then do it for the client you are running in:
 
 | Client | How to add |
