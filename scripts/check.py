@@ -11,7 +11,7 @@ errors = []
 # 1. MCP 地址：以 .mcp.json 为准；connect skill 与两份 README（Claude.ai 用户要直接复制地址）必须与之一致，
 #    其它文件不得再写地址（换域名只改这四处）
 url = json.loads((ROOT / '.mcp.json').read_text())['mcpServers']['scrumball']['url']
-URL_FILES = ('.mcp.json', 'skills/scrumball-connect/SKILL.md', 'README.md', 'README.zh.md')
+URL_FILES = ('.mcp.json', 'skills/scrumball-connect/SKILL.md', 'README.md', 'README.zh.md', 'bin/migrate.js')
 for f in URL_FILES[1:]:
     body = (ROOT / f).read_text()
     if url not in body:
@@ -19,7 +19,7 @@ for f in URL_FILES[1:]:
     for m in re.findall(r'https?://api\.[a-z0-9.-]+/mcp/server', body):
         if m != url:
             errors.append(f'{f}: 出现与 .mcp.json 不同的地址 {m}')
-text_files = [p for p in ROOT.rglob('*') if p.is_file() and '.git' not in p.parts and p.suffix in ('.md', '.json', '.yaml', '.yml', '.txt')]
+text_files = [p for p in ROOT.rglob('*') if p.is_file() and '.git' not in p.parts and p.suffix in ('.md', '.json', '.yaml', '.yml', '.txt', '.js')]
 for p in text_files:
     rel = p.relative_to(ROOT).as_posix()
     s = p.read_text(errors='ignore')
@@ -31,6 +31,12 @@ for p in text_files:
         errors.append(f'{rel}: 出现旧品牌名或旧域名 KOL Masters')
     if re.search(r'coredesk|kolpalybook', s, re.I):
         errors.append(f'{rel}: 出现内部测试环境地址')
+
+# 1b. npm 包与 Claude 插件版本号一致（同一份内容两处发布）
+pkg_ver = json.loads((ROOT / 'package.json').read_text())['version']
+plugin_ver = json.loads((ROOT / '.claude-plugin/plugin.json').read_text())['version']
+if pkg_ver != plugin_ver:
+    errors.append(f'package.json 版本 {pkg_ver} 与 .claude-plugin/plugin.json 版本 {plugin_ver} 不一致')
 
 # 2. skill 格式：frontmatter 有 name/description，name 与目录名一致，description 不超长
 tools = {l.strip() for l in (ROOT / 'scripts/tools.txt').read_text().splitlines() if l.strip() and not l.startswith('#')}

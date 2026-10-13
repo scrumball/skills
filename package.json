@@ -1,0 +1,35 @@
+{
+  "name": "scrumball-influencer-plugins",
+  "version": "2.0.0",
+  "description": "Scrumball influencer marketing platform for AI agents: skills plus a remote MCP server with browser sign-in. Creator search, outreach tasks, inbox and usage statistics.",
+  "homepage": "https://github.com/scrumball/skills",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scrumball/skills.git"
+  },
+  "license": "MIT",
+  "author": "Scrumball",
+  "bin": {
+    "scrumball-mcp": "bin/migrate.js",
+    "scrumball-server": "bin/migrate.js"
+  },
+  "files": [
+    ".claude-plugin",
+    ".mcp.json",
+    "skills",
+    "bin",
+    "README.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "scrumball",
+    "influencer marketing",
+    "creator outreach",
+    "mcp",
+    "agent-skills",
+    "claude",
+    "codex",
+    "openclaw"
+  ]
+}
