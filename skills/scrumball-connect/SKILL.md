@@ -27,7 +27,7 @@ Never add a second Scrumball server when one is already configured.
 Server URL (Streamable HTTP, OAuth sign-in):
 
 ```
-https://api.kolmasters.com/mcp/server
+https://api.scrumball.ai/mcp/server
 ```
 
 If the environment variable `SCRUMBALL_MCP_URL` is set (check with `echo $SCRUMBALL_MCP_URL`; on Windows `echo %SCRUMBALL_MCP_URL%`), use its value instead of the URL above and tell the user which address you are using. Otherwise use the URL above.

@@ -20,9 +20,9 @@ for p in text_files:
     if rel not in ('.mcp.json', 'skills/scrumball-connect/SKILL.md'):
         for m in re.findall(r'https?://api\.[a-z0-9.-]+/mcp/server', s):
             errors.append(f'{rel}: MCP 地址只能写在 .mcp.json 与 scrumball-connect，发现 {m}')
-    # 旧品牌名与内部测试环境不得对外出现（地址里的域名例外，换域名前暂存）
-    if re.search(r'kol\s*masters', s.replace(url, ''), re.I):
-        errors.append(f'{rel}: 出现旧品牌名 KOL Masters')
+    # 旧品牌名 / 旧域名与内部测试环境不得对外出现（2026-10 已换到 api.scrumball.ai）
+    if re.search(r'kol\s*masters', s, re.I):
+        errors.append(f'{rel}: 出现旧品牌名或旧域名 KOL Masters')
     if re.search(r'coredesk|kolpalybook', s, re.I):
         errors.append(f'{rel}: 出现内部测试环境地址')
 
