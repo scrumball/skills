@@ -50,7 +50,7 @@ New servers usually load only after the client restarts or reconnects. Then the 
 
 | Client | How to open the sign-in page |
 |---|---|
-| Claude Code | the user types `/mcp`, picks `scrumball`, chooses Authenticate (restart Claude Code first if the server was just added) |
+| Claude Code | the user types `/mcp`, picks `scrumball` (listed as `plugin:scrumball:scrumball` when installed as a plugin), chooses Authenticate (restart Claude Code first if the server was just added) |
 | Codex CLI | run `codex mcp login scrumball` |
 | Gemini CLI | the user types `/mcp auth scrumball` |
 | Cursor / VS Code | the login / Start button next to `scrumball` in the MCP settings |

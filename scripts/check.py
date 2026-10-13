@@ -8,18 +8,24 @@ import json, pathlib, re, sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 errors = []
 
-# 1. MCP 地址：以 .mcp.json 为准，connect skill 必须与之一致，其它文件不得再写地址（换域名只改这两处）
+# 1. MCP 地址：以 .mcp.json 为准；connect skill 与两份 README（Claude.ai 用户要直接复制地址）必须与之一致，
+#    其它文件不得再写地址（换域名只改这四处）
 url = json.loads((ROOT / '.mcp.json').read_text())['mcpServers']['scrumball']['url']
-connect = (ROOT / 'skills/scrumball-connect/SKILL.md').read_text()
-if url not in connect:
-    errors.append(f'scrumball-connect 里的地址与 .mcp.json 不一致：{url}')
+URL_FILES = ('.mcp.json', 'skills/scrumball-connect/SKILL.md', 'README.md', 'README.zh.md')
+for f in URL_FILES[1:]:
+    body = (ROOT / f).read_text()
+    if url not in body:
+        errors.append(f'{f} 里的地址与 .mcp.json 不一致：{url}')
+    for m in re.findall(r'https?://api\.[a-z0-9.-]+/mcp/server', body):
+        if m != url:
+            errors.append(f'{f}: 出现与 .mcp.json 不同的地址 {m}')
 text_files = [p for p in ROOT.rglob('*') if p.is_file() and '.git' not in p.parts and p.suffix in ('.md', '.json', '.yaml', '.yml', '.txt')]
 for p in text_files:
     rel = p.relative_to(ROOT).as_posix()
     s = p.read_text(errors='ignore')
-    if rel not in ('.mcp.json', 'skills/scrumball-connect/SKILL.md'):
+    if rel not in URL_FILES:
         for m in re.findall(r'https?://api\.[a-z0-9.-]+/mcp/server', s):
-            errors.append(f'{rel}: MCP 地址只能写在 .mcp.json 与 scrumball-connect，发现 {m}')
+            errors.append(f'{rel}: MCP 地址只能写在 ' + ' / '.join(URL_FILES) + f'，发现 {m}')
     # 旧品牌名 / 旧域名与内部测试环境不得对外出现（2026-10 已换到 api.scrumball.ai）
     if re.search(r'kol\s*masters', s, re.I):
         errors.append(f'{rel}: 出现旧品牌名或旧域名 KOL Masters')
