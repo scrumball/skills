@@ -2,3 +2,9 @@
 .DS_Store
 *.swp
 *.swo
+
+# 本地禁用词表（词表本身不能公开）
+scripts/.deny-terms
+
+# 打包产物（WorkBuddy 连接器 / 技能市场 zip）
+dist/

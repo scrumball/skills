@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "scrumball": {
+      "type": "streamableHttp",
+      "url": "https://api.scrumball.ai/mcp/server",
+      "timeout": 30000
+    }
+  }
+}

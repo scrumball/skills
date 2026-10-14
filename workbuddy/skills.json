@@ -1,0 +1,37 @@
+{
+  "_comment": "WorkBuddy 打包时注入 SKILL.md frontmatter 的字段（官方必填 description_zh / description_en / version / author）。源 skills/ 不加这些字段，避免影响其它客户端。author 应与入驻主体名称一致，入驻后核对。",
+  "author": "Scrumball",
+  "skills": {
+    "scrumball-connect": {
+      "display_name": "Scrumball 连接与授权",
+      "display_name_en": "Scrumball Connection",
+      "description_zh": "Scrumball 连接器的登录授权与问题排查。",
+      "description_en": "Sign-in and troubleshooting for the Scrumball connector."
+    },
+    "scrumball-creators": {
+      "display_name": "Scrumball 找网红",
+      "display_name_en": "Scrumball Creators",
+      "description_zh": "按领域、国家、粉丝量搜索 YouTube / Instagram / TikTok 网红，查看数据与近期作品，存入收藏夹，经同意后解锁联系邮箱。",
+      "description_en": "Search YouTube, Instagram and TikTok creators, review stats and recent posts, save to collections and, with your OK, unlock contact emails."
+    },
+    "scrumball-outreach": {
+      "display_name": "Scrumball 建联与回信",
+      "display_name_en": "Scrumball Outreach",
+      "description_zh": "查看建联任务、建联数据看板和与网红的往来邮件，找出待回复、已报价和久未跟进的会话。只读。",
+      "description_en": "Read outreach tasks, the outreach dashboard and email threads with creators; find replies to handle, quotes and stalled threads. Read-only."
+    },
+    "scrumball-stats": {
+      "display_name": "Scrumball 使用统计",
+      "display_name_en": "Scrumball Usage Stats",
+      "description_zh": "按成员或全公司查看解锁、收藏、建联、发信与回复数据，排行、趋势、消费与剩余额度。",
+      "description_en": "Usage per member or company-wide: unlocks, saves, outreach, emails sent and replied, rankings, trends, spending and remaining credits."
+    }
+  },
+  "entry": {
+    "name": "scrumball-influencer-marketing",
+    "display_name": "Scrumball 网红营销",
+    "display_name_en": "Scrumball Influencer Marketing",
+    "description_zh": "用 Scrumball 网红营销平台找网红、跟进建联和网红回信、看团队数据。首次使用会引导你安装 Scrumball 连接器。",
+    "description_en": "Use Scrumball to find creators, follow outreach and creator emails, and review team usage. Guides you to install the Scrumball connector first."
+  }
+}

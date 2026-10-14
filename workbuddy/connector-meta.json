@@ -1,0 +1,26 @@
+{
+  "name": "Scrumball",
+  "name_zh": "Scrumball 网红营销",
+  "name_en": "Scrumball Influencer Marketing",
+  "description": "Find creators, follow outreach campaigns, triage creator emails and review team usage on Scrumball.",
+  "description_zh": "在 Scrumball 网红营销平台找网红、跟进建联任务、处理网红回信、查看团队使用统计与剩余额度。用 Scrumball 账号登录授权，无需 API Key。",
+  "description_en": "Find creators, follow outreach, triage creator emails and review team usage and credits on Scrumball.",
+  "source": "scrumball",
+  "type": "mcp",
+  "version": "2.0.1",
+  "minWorkbuddyVersion": "4.24.0",
+  "examples_zh": [
+    "帮我在 TikTok 上找 20 个美国美妆博主，粉丝 5 万到 50 万",
+    "今天有哪些网红回信要我处理？超时没回的排前面",
+    "「夏季上新」这个任务里，哪些网红报了价？",
+    "最近 30 天建联效果怎么样？",
+    "我还剩多少解锁额度？"
+  ],
+  "examples_en": [
+    "Find 20 US beauty creators on TikTok with 50k to 500k followers",
+    "What creator emails need my reply today? Overdue ones first",
+    "Which creators in the Summer Launch campaign quoted a price?",
+    "How did my outreach do in the last 30 days?",
+    "How many unlock credits do I have left?"
+  ]
+}
