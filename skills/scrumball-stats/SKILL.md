@@ -8,6 +8,8 @@ compatibility: Requires the Scrumball MCP server (see scrumball-connect).
 
 Requires the Scrumball tools (`employee_activity_overview`, `wallet_consumption`, …). If they are missing, follow the `scrumball-connect` skill first.
 
+Every tool result has `meta.notices`. When it is not empty, tell the user what it says before you interpret any numbers; a notice can mean that zeros or low numbers are not real results.
+
 ## Whose data you see
 
 Data follows the account the user signed in with:
@@ -16,6 +18,8 @@ Data follows the account the user signed in with:
 - **Member account**: that member's own data.
 
 Statistics tools also need an active Scrumball membership. If a tool says the account or membership does not allow it, explain that plainly instead of retrying.
+
+The first statistics call for a company switches statistics on: the last few days are ready at once, and older history is filled in within a few minutes. While `meta.notices` says history is still being filled in, older dates can show 0 or too little; tell the user and offer to check again in a few minutes instead of reporting those numbers as their activity. If it says filling in history failed, say that older numbers are unavailable and the user should contact Scrumball; only the most recent days are reliable.
 
 ## Periods
 

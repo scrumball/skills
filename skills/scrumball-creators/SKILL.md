@@ -8,6 +8,8 @@ compatibility: Requires the Scrumball MCP server (see scrumball-connect).
 
 Requires the Scrumball tools (`search_creators`, `get_creator`, …). If they are missing, follow the `scrumball-connect` skill first.
 
+Every tool result has `meta.notices`. When it is not empty, tell the user what it says before you interpret any numbers; a notice can mean that zeros or low numbers are not real results.
+
 The usual journey is one chain: **search → evaluate → save to a collection → unlock emails → start outreach on the website**. Users often ask for several steps at once ("find and save 10 fitness creators"); run the chain, but never unlock emails unless the user asked for emails.
 
 ## Tools at a glance
@@ -38,10 +40,12 @@ Identifiers: search and collection results give `channel_id`; pass it as `channe
 
 1. Turn the brief into filters: platform (ask if not given), keyword for the niche, `countries` (ISO codes like `US`), follower range, `languages`, `gender`.
 2. `search_creators`. Every result has an email that can be unlocked.
-3. Show a short table: name, platform, followers, engagement rate (already a percentage: `1.35` means 1.35%), country, last post date, data date (`updated_at`). Build profile links from `platform` + `channel_id`: YouTube `https://www.youtube.com/channel/{channel_id}`, TikTok `https://www.tiktok.com/@{channel_id}`, Instagram `https://www.instagram.com/{channel_id}/`. Say how many matched in total; if the total is larger than the viewable limit, explain that the membership tier caps how many results can be viewed.
+3. Show a short table: name, platform, followers, engagement rate (a percentage: `1.35` means 1.35%; a value above 100 usually comes from bad source data — mark it as unreliable instead of quoting it), country, last post date, data date (`updated_at`). Build profile links from `platform` + `channel_id`: YouTube `https://www.youtube.com/channel/{channel_id}`, TikTok `https://www.tiktok.com/@{channel_id}`, Instagram `https://www.instagram.com/{channel_id}/`. Say how many matched in total; if the total is larger than the viewable limit, explain that the membership tier caps how many results can be viewed.
 4. Offer the next step: look closer at some of them, or save them to a collection.
 
 If results are thin, loosen one filter at a time and say which one.
+
+For "high engagement" requests, sorting by `engagement_rate|desc` tends to put creators with bad data (values above 100) first. Raise `follower_count_min` or sort by `avg_like_count` instead, then confirm the shortlist with `get_creator` (`last_month_avg_engagement_rate`).
 
 Results cover every account posting matching content, including brand and store accounts. Mark the ones that look like a brand or shop (name, bio, verification) in the table so the user can drop them.
 

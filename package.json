@@ -1,6 +1,6 @@
 {
   "name": "scrumball-influencer-plugins",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Scrumball influencer marketing platform for AI agents: skills plus a remote MCP server with browser sign-in. Creator search, outreach tasks, inbox and usage statistics.",
   "homepage": "https://github.com/scrumball/skills",
   "repository": {

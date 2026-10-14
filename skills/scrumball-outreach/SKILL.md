@@ -8,6 +8,8 @@ compatibility: Requires the Scrumball MCP server (see scrumball-connect).
 
 Requires the Scrumball tools (`outreach_task_*`, `outreach_dashboard_*`, `outreach_inbox_*`). If they are missing, follow the `scrumball-connect` skill first.
 
+Every tool result has `meta.notices`. When it is not empty, tell the user what it says before you interpret any numbers; a notice can mean that zeros or low numbers are not real results.
+
 ## Whose data you see
 
 Data follows the account the user signed in with: the company main account sees every member's tasks and conversations (filter one member with `operator_id`); a member account sees its own.

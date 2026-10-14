@@ -7,7 +7,7 @@
   "description_en": "Find creators, follow outreach, triage creator emails and review team usage and credits on Scrumball.",
   "source": "scrumball",
   "type": "mcp",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "minWorkbuddyVersion": "4.24.0",
   "examples_zh": [
     "帮我在 TikTok 上找 20 个美国美妆博主，粉丝 5 万到 50 万",
