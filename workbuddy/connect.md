@@ -12,9 +12,17 @@ In WorkBuddy, Scrumball is installed as a connector. The connector already conta
 
 ## 1. Check the tools
 
-Scrumball is connected if the tool list contains any of: `search_creators`, `get_creator`, `get_quota_status`, `employee_activity_overview`, `wallet_consumption`, or `outreach_*` tools.
+Scrumball is connected if the tool list contains any tool from these families:
 
-If none are present, the connector is not installed or not signed in: ask the user to open WorkBuddy's connector marketplace (连接器市场), search for **Scrumball**, install it if needed and connect it. A browser page opens for signing in.
+- `search_creators`, `get_creator`, `get_quota_status`
+- `employee_activity_overview`, `wallet_consumption`
+- `outreach_inbox_summary` and other `outreach_*` tools
+- `tracking_performance_list`, `tracking_publish_list`
+- `resource_list`, `campaign_list`, `approval_list`
+
+If some families are present but the one the user needs is missing, see "A capability is missing" in section 3.
+
+If no Scrumball tools are present, the connector is not installed or not signed in: ask the user to open WorkBuddy's connector marketplace (连接器市场), search for **Scrumball**, install it if needed and connect it. A browser page opens for signing in.
 
 If the user also added Scrumball by hand earlier as a custom MCP server, suggest removing that one so the tools are not listed twice.
 
@@ -29,6 +37,11 @@ The user logs in with their Scrumball account (the same one as on the website; c
 | Spend your unlock credits to reveal creator emails / 代你消耗解锁额度获取网红邮箱 | unlock creator emails — **spends paid credits, non-refundable** |
 | View per-member usage and spending / 查看团队成员的使用与消费明细 | see each team member's activity, spending and ranking |
 | View outreach campaigns and email threads / 查看建联任务与往来邮件 | read outreach tasks, the dashboard and email threads with creators |
+| View performance and post tracking data / 查看成效追踪与贴文追踪数据 | read tracked post results and publishing watches |
+| View resource management (CRM) / 查看资源管理（CRM） | read the company resource library |
+| Edit resource management (CRM) / 编辑资源管理（CRM） | add or change company resource records, including statuses that can affect block lists |
+| View campaigns / 查看推广活动 | read promotion activities and creator collaborations |
+| View approvals / 查看审批 | read promotion approval applications and flows |
 
 Point out the credit-spending permission before the user approves; untick it to keep the AI from spending unlock credits. Only approved permissions are usable — tools for the others do not appear.
 
@@ -40,7 +53,7 @@ You cannot click for the user; tell them exactly where to go.
 |---|---|
 | No Scrumball tools at all | Install or connect the Scrumball connector (section 1). |
 | 401 / unauthorized / sign-in expired | Reconnect / re-authorize the Scrumball connector and sign in again. |
-| 403 `insufficient_scope`, or a capability is missing | That permission was unticked at sign-in, or the capability was released after the last sign-in. Reconnect / re-authorize the Scrumball connector and keep the permission ticked. If it is still missing, uninstall the Scrumball connector and install it again. |
+| 403 `insufficient_scope`, or a capability is missing (some Scrumball tools present, the needed ones absent) | That permission was unticked at sign-in, or the capability was released after the last sign-in. Reconnect / re-authorize the Scrumball connector and keep the permission ticked. If it is still missing, uninstall the Scrumball connector and install it again. |
 | `invalid_scope` on the sign-in page | Uninstall the Scrumball connector and install it again. |
 | `access_denied` on the sign-in page | The account cannot authorize; use the company main account or a member account of the company. |
 | Tools look outdated after a Scrumball update | Reconnect the connector. |
@@ -50,4 +63,4 @@ You cannot click for the user; tell them exactly where to go.
 
 ## After connecting
 
-Continue with the user's original request. Related skills: `scrumball-creators` (find and evaluate creators, collections, unlock emails), `scrumball-outreach` (outreach tasks, dashboard, inbox), `scrumball-stats` (usage statistics, spending, credits).
+Continue with the user's original request. Related skills: `scrumball-creators` (find and evaluate creators, collections, unlock emails), `scrumball-outreach` (outreach tasks, dashboard, inbox), `scrumball-stats` (usage statistics, spending, credits), `scrumball-tracking` (performance and post tracking), `scrumball-resources` (resource library / CRM), `scrumball-campaigns` (promotion activities and collaborations) and `scrumball-approvals` (campaign approvals). Use the tools available in the current connection.

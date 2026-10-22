@@ -5,13 +5,13 @@
     "email": "platform@scrumball.com"
   },
   "metadata": {
-    "description": "Scrumball influencer marketing platform: creator search, outreach and usage statistics for AI agents, connected through MCP with browser sign-in.",
-    "version": "2.0.2"
+    "description": "Scrumball influencer marketing platform: creator search, outreach, usage statistics, performance tracking, resource library, campaigns and approvals for AI agents, connected through MCP with browser sign-in.",
+    "version": "2.0.3"
   },
   "plugins": [
     {
       "name": "scrumball",
-      "description": "Scrumball MCP connection plus skills for creator discovery, outreach tasks, dashboard, inbox and usage statistics.",
+      "description": "Scrumball MCP connection plus skills for creator discovery, outreach and inbox, usage statistics, performance tracking, resource library (CRM), promotion campaigns and approvals.",
       "source": "./"
     }
   ]
