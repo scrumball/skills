@@ -1,6 +1,6 @@
 ---
 name: scrumball-connect
-description: "Connect Scrumball, the influencer marketing platform (网红营销平台), to this AI client through MCP with a browser sign-in — no API key. Use when the user wants Scrumball data or actions (creators / 网红 / 达人 / KOL, outreach / 建联, inbox / 回信, statistics / 统计, credits / 额度) but no Scrumball tools are available yet, or a Scrumball tool fails with 401 / unauthorized / insufficient_scope, or an expected Scrumball capability is missing. 例如「连接 Scrumball」「Scrumball 授权失效了」「怎么在 AI 里用 Scrumball」。"
+description: "Connect Scrumball, the influencer marketing platform (网红营销平台), to this AI client through MCP with a browser sign-in — no API key. Use when Scrumball tools are missing or fail with 401 / insufficient_scope, including creator search, outreach, statistics, tracking / 追踪, resources / 资源管理, campaigns / 推广活动 or approvals / 审批. 例如「连接 Scrumball」「Scrumball 授权失效了」「怎么在 AI 里用 Scrumball」。"
 compatibility: Connects the Scrumball remote MCP server; other scrumball-* skills depend on it.
 ---
 
@@ -15,6 +15,8 @@ Scrumball is connected if the tool list contains any tool from these families, w
 - `search_creators`, `get_creator`, `get_quota_status`
 - `employee_activity_overview`, `wallet_consumption`
 - `outreach_inbox_summary` and other `outreach_*` tools
+- `tracking_performance_list`, `tracking_publish_list`
+- `resource_list`, `campaign_list`, `approval_list`
 
 If some families are present but the one the user needs is missing, go to section 4 (missing capability).
 
@@ -67,6 +69,11 @@ On the sign-in page the user logs in with their Scrumball account (the same one 
 | Spend your unlock credits to reveal creator emails / 代你消耗解锁额度获取网红邮箱 | unlock creator emails — **spends paid credits, non-refundable** |
 | View per-member usage and spending / 查看团队成员的使用与消费明细 | see each team member's activity, spending and ranking |
 | View outreach campaigns and email threads / 查看建联任务与往来邮件 | read outreach tasks, the dashboard and email threads with creators |
+| View performance and post tracking data / 查看成效追踪与贴文追踪数据 | read tracked post results and publishing watches |
+| View resource management (CRM) / 查看资源管理（CRM） | read the company resource library |
+| Edit resource management (CRM) / 编辑资源管理（CRM） | add or change company resource records, including statuses that can affect block lists |
+| View campaigns / 查看推广活动 | read promotion activities and creator collaborations |
+| View approvals / 查看审批 | read promotion approval applications and flows |
 
 Point out the credit-spending permission before the user approves; untick it to keep the AI from spending unlock credits. Only approved permissions are usable — tools for the others do not appear. After approval the tools appear; some clients need one more reconnect.
 
@@ -76,7 +83,8 @@ Point out the credit-spending permission before the user approves; untick it to 
 |---|---|
 | Scrumball tools cannot be found at all (找不到工具), although the server was added | The client has not loaded it or the user has not signed in yet: restart / reconnect the client, then sign in (section 3). If the server is not in the client's MCP list, add it (section 2). |
 | 401 / unauthorized / token expired | Sign in again (section 3). |
-| 403 `insufficient_scope`, or a capability is missing from the tool list | That permission was unticked at sign-in, or the capability was released after the last sign-in. Sign in again and keep it ticked; if it is still missing, remove the `scrumball` server and add it again (section 2). |
+| 403 `insufficient_scope` | Check whether the requested permission was granted; sign in again and approve it if the user wants that access. |
+| A capability is missing from the tool list | Check whether the connected server provides it to this client and account. If it is available and in scope, reconnect to refresh the cached list; re-authorize if the required permission was not granted. Do not keep reconnecting for a tool unavailable to this client. |
 | `invalid_scope` on the sign-in page | Remove the `scrumball` server and add it again. |
 | `access_denied` on the sign-in page | The account cannot authorize; use the company main account or a member account of the company. |
 | Tools look outdated after a Scrumball update | The client cached the tool list; reconnect the server. |
@@ -87,4 +95,4 @@ Point out the credit-spending permission before the user approves; untick it to 
 
 ## After connecting
 
-Continue with the user's original request. Related skills: `scrumball-creators` (find and evaluate creators, collections, unlock emails), `scrumball-outreach` (outreach tasks, dashboard, inbox), `scrumball-stats` (usage statistics, spending, credits).
+Continue with the user's original request. Related skills: `scrumball-creators`, `scrumball-outreach`, `scrumball-stats`, `scrumball-tracking`, `scrumball-resources`, `scrumball-campaigns` and `scrumball-approvals`. Use the tools available in the current connection.

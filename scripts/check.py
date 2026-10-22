@@ -73,7 +73,7 @@ if pkg_ver != plugin_ver:
 tools = {l.strip() for l in (ROOT / 'scripts/tools.txt').read_text().splitlines() if l.strip() and not l.startswith('#')}
 # 形似 tool 名但其实是参数取值的标识（团队统计的 metric 取值）
 NON_TOOLS = {'wallet_spend'}
-tool_pat = re.compile(r'`((?:outreach|search|get|list|unlock|create|add|remove|check|employee|module|wallet|activity)_[a-z_]+)`')
+tool_pat = re.compile(r'`((?:outreach|search|get|list|unlock|create|add|remove|check|employee|module|wallet|activity|tracking|resource|campaign|approval)_[a-z_]+)`')
 # WorkBuddy 版 connect 与技能市场入口 skill 也按同样规则检查（名字取自 frontmatter 期望值）
 wb_conf = json.loads((ROOT / 'workbuddy/skills.json').read_text())
 SKILL_SOURCES = [(p, p.parent.name) for p in sorted((ROOT / 'skills').glob('*/SKILL.md'))]

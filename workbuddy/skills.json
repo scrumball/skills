@@ -25,6 +25,30 @@
       "display_name_en": "Scrumball Usage Stats",
       "description_zh": "按成员或全公司查看解锁、收藏、建联、发信与回复数据，排行、趋势、消费与剩余额度。",
       "description_en": "Usage per member or company-wide: unlocks, saves, outreach, emails sent and replied, rankings, trends, spending and remaining credits."
+    },
+    "scrumball-tracking": {
+      "display_name": "Scrumball 成效追踪",
+      "display_name_en": "Scrumball Tracking",
+      "description_zh": "查看推广成效报告与贴文发布追踪。",
+      "description_en": "Review campaign performance reports and post tracking."
+    },
+    "scrumball-resources": {
+      "display_name": "Scrumball 资源管理",
+      "display_name_en": "Scrumball Resources",
+      "description_zh": "查看网红资源记录；经授权可编辑标签、备注、状态和自定义字段。",
+      "description_en": "Review creator resources and, with permission, edit tags, remarks, status and custom fields."
+    },
+    "scrumball-campaigns": {
+      "display_name": "Scrumball 推广活动",
+      "display_name_en": "Scrumball Campaigns",
+      "description_zh": "查看推广活动与网红合作记录。",
+      "description_en": "Review promotion campaigns and creator collaborations."
+    },
+    "scrumball-approvals": {
+      "display_name": "Scrumball 审批",
+      "display_name_en": "Scrumball Approvals",
+      "description_zh": "查看推广活动审批单、审批人和流程。",
+      "description_en": "Review promotion approvals, approvers and flows."
     }
   },
   "entry": {

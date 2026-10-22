@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-让 AI 助手使用 **Scrumball 网红营销平台**：找网红、跟进建联任务、梳理与网红的往来邮件、查看使用统计。
+让 AI 助手使用 **Scrumball 网红营销平台**：找网红、跟进建联任务、梳理与网红的往来邮件、查看使用统计与推广成效、管理网红资源、查看推广活动和审批。
 
 在浏览器里用 Scrumball 账号登录授权即可，不需要 API Key。
 
@@ -48,7 +48,7 @@ npx skills add scrumball/skills -g
 2. **上传 Skill（推荐）**：Skill 会引导 AI 正确使用，包括解锁邮箱前的额度确认。
    1. 在 **Settings → Capabilities** 打开 **Code execution and file creation**。
    2. 下载本仓库（**Code → Download ZIP**）并解压。
-   3. 在 `skills` 文件夹里，把四个文件夹分别单独压缩（Mac：右键 → 压缩；Windows：右键 → 发送到 → 压缩(zipped)文件夹）。每个 zip 里要包含文件夹本身，例如 `scrumball-creators/SKILL.md`。
+   3. 在 `skills` 文件夹里，把各文件夹分别单独压缩（Mac：右键 → 压缩；Windows：右键 → 发送到 → 压缩(zipped)文件夹）。每个 zip 里要包含文件夹本身，例如 `scrumball-creators/SKILL.md`。
    4. 逐个在 **Customize → Skills → + → Create skill → Upload a skill** 上传。
 
 ### 确认装好了
@@ -63,7 +63,7 @@ npx skills add scrumball/skills -g
 | `npx skills add` | `npx skills update` |
 | Claude.ai 上传 | 重新上传新的 zip |
 
-## 包含的 Skill
+## Skill
 
 | Skill | 用途 |
 |---|---|
@@ -71,6 +71,10 @@ npx skills add scrumball/skills -g
 | `scrumball-creators` | 找网红、评估网红、存入收藏夹、解锁联系邮箱 |
 | `scrumball-outreach` | 建联任务、建联数据看板、消息工单（与网红的往来邮件） |
 | `scrumball-stats` | 按成员或全公司的使用统计、排行、趋势、消费与剩余额度 |
+| `scrumball-tracking` | 成效报告与贴文追踪，只读 |
+| `scrumball-resources` | 查询与添加网红资源；授权后更新标签、备注、状态和自定义字段 |
+| `scrumball-campaigns` | 推广活动与网红合作记录；外部客户端只读 |
+| `scrumball-approvals` | 推广活动审批单与流程；外部客户端只读 |
 
 ## 可以这样问
 
@@ -80,7 +84,7 @@ npx skills add scrumball/skills -g
 - 「最近 30 天建联效果怎么样？」
 - 「我还剩多少解锁额度？」
 
-AI 可以搜索网红、存入收藏夹，经你同意后解锁邮箱。建联和统计只读：发邮件、建任务、改任务在 Scrumball 网页完成，AI 会给出对应页面的链接。
+AI 可以搜索网红、存入收藏夹，经你同意后解锁邮箱；授予 `resource:write` 权限后可添加和编辑资源记录。外部客户端的建联、统计、追踪、推广活动和审批工具只读。
 
 ## License
 

@@ -2,7 +2,7 @@
 
 [中文](README.zh.md)
 
-Skills that let AI agents work with **Scrumball**, the influencer marketing platform: find creators, follow outreach campaigns, triage the creator inbox and review usage statistics.
+Skills that let AI agents work with **Scrumball**, the influencer marketing platform: find creators, follow outreach, triage the creator inbox, review usage statistics and performance, manage creator resources, and review promotion campaigns and approvals.
 
 You sign in with your Scrumball account in the browser. No API key.
 
@@ -48,7 +48,7 @@ Then ask your agent anything about Scrumball, for example *"what creator emails 
 2. **Upload the skills (recommended):** they guide the agent, including the credit check before unlocking emails.
    1. Turn on **Settings → Capabilities → Code execution and file creation**.
    2. Download this repository (**Code → Download ZIP**) and unzip it.
-   3. In the `skills` folder, compress each of the four folders on its own (Mac: right-click → Compress; Windows: right-click → Send to → Compressed (zipped) folder). Each zip must contain the folder, for example `scrumball-creators/SKILL.md`.
+   3. In the `skills` folder, compress each folder on its own (Mac: right-click → Compress; Windows: right-click → Send to → Compressed (zipped) folder). Each zip must contain the folder, for example `scrumball-creators/SKILL.md`.
    4. Upload each zip under **Customize → Skills → + → Create skill → Upload a skill**.
 
 ### Check that it works
@@ -71,6 +71,10 @@ Ask *"How many unlock credits do I have left?"*. If the agent answers with your 
 | `scrumball-creators` | Finding and evaluating creators, saving them to collections, unlocking contact emails |
 | `scrumball-outreach` | Outreach tasks, the outreach dashboard and the inbox of email threads with creators |
 | `scrumball-stats` | Usage statistics per member or company-wide, rankings, trends, spending and remaining credits |
+| `scrumball-tracking` | Performance reports and post tracking, read-only |
+| `scrumball-resources` | Finding and adding creator resources, updating tags, remarks, status and custom fields with permission |
+| `scrumball-campaigns` | Promotion campaigns and creator collaborations, read-only in external clients |
+| `scrumball-approvals` | Campaign approval applications and flows, read-only in external clients |
 
 ## What you can ask
 
@@ -80,7 +84,7 @@ Ask *"How many unlock credits do I have left?"*. If the agent answers with your 
 - "How did my outreach do in the last 30 days?"
 - "How many unlock credits do I have left?"
 
-The agent can search creators, save them to collections and, with your OK, unlock emails. Outreach and statistics are read-only: sending emails and creating or editing campaigns happen on the Scrumball website, and the agent gives you the link.
+The agent can search creators, save them to collections and, with your OK, unlock emails. Resource records can be added or edited with `resource:write` permission. Outreach, statistics, tracking, promotion campaigns and approvals are read-only in external clients.
 
 ## License
 
