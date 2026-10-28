@@ -1,6 +1,6 @@
 ---
 name: scrumball-creators
-description: "Find and evaluate creators / influencers (网红、达人、红人、博主、KOL) on Scrumball, the influencer marketing platform (网红营销平台) — search YouTube, Instagram and TikTok by niche, country, follower range and language; view a creator's profile stats and recent posts / videos with their performance; compare creators; save shortlists to collections (收藏夹); unlock creator contact emails (解锁邮箱). Use for \"find 20 US beauty creators on TikTok\", \"is this creator still active\", \"compare these channels\", \"save them to my list\", \"get their emails\". 例如「帮我找20个美国美妆达人」「这个博主最近数据怎么样」「把他们加到收藏夹」「拿到这几个人的邮箱」。"
+description: "Find and evaluate creators / influencers (网红、达人、红人、博主、KOL) on Scrumball, the influencer marketing platform (网红营销平台) — search YouTube, Instagram and TikTok by niche, country, follower range and language; view a creator's profile stats and recent posts / videos with their performance; see who a creator's audience is (countries, gender, age, AI audience profile / 受众画像); compare creators; save shortlists to collections (收藏夹); unlock creator contact emails (解锁邮箱). Use for \"find 20 US beauty creators on TikTok\", \"is this creator still active\", \"where is this creator's audience from\", \"compare these channels\", \"save them to my list\", \"get their emails\". 例如「帮我找20个美国美妆达人」「这个博主最近数据怎么样」「他的粉丝主要是哪国人、什么年龄」「把他们加到收藏夹」「拿到这几个人的邮箱」。"
 compatibility: Requires the Scrumball MCP server (see scrumball-connect).
 ---
 
@@ -19,13 +19,14 @@ The usual journey is one chain: **search → evaluate → save to a collection �
 | Search creators | `search_creators` (one platform per call) |
 | Creator profile: followers, average views / likes / comments, last-30-day performance, posting frequency, verification, email status, profile link | `get_creator` (up to 10 creators per call, charged once) |
 | A creator's recent posts / videos with views, likes, comments, shares | `get_creator_posts` (10 per page) |
+| Audience: countries, gender, age × gender, devices, plus an AI audience profile (segments, interests, fan quality, persuasion) | `get_creator_audience` (up to 5 creators per call, charged once; creators the account has unlocked on the website) |
 | Collections | `list_collections`, `create_collection`, `add_creators_to_collection`, `list_collection_creators`, `check_creators_collected`, `remove_creators_from_collection` |
 | Unlock contact emails | `unlock_creator_emails` (up to 10 per call) |
 | Remaining credits | `get_quota_status` |
 
 There is no single-video detail tool; per-post numbers come from `get_creator_posts`.
 
-Identifiers: search and collection results give `channel_id`; pass it as `channel` (with `platform`) to `get_creator`, `get_creator_posts`, the collection tools and `unlock_creator_emails`.
+Identifiers: search and collection results give `channel_id`; pass it as `channel` (with `platform`) to `get_creator`, `get_creator_posts`, `get_creator_audience`, the collection tools and `unlock_creator_emails`.
 
 ## Two kinds of credits
 
@@ -55,9 +56,24 @@ Results cover every account posting matching content, including brand and store 
 2. `get_creator_posts` for what they post and how each post performed.
 3. Give a verdict with the supporting numbers: audience size, typical views, engagement, posting frequency, recent topics.
 
+### "Who is this creator's audience?"
+
+1. `get_creator_audience` (pass `lang: "zh"` when the user writes Chinese; use `include` to fetch only `demographics` or only `ai_profile` when that is all the question needs).
+2. Check `audience_status` for each creator:
+   - `unlocked` — the account has unlocked this creator's audience analysis on the website; the data is there, with `unlocked_at`.
+   - `locked` — not unlocked, or the unlock lapsed with the membership. Give the user the `unlock_url`; unlocking happens on the website. A locked creator has no audience data in the result, so say so instead of guessing.
+   - `analyzing` — unlocked and still being analysed; suggest checking back later. `no_data` / `failed` — nothing usable.
+3. Present `demographics`: top countries, gender split, the dominant age bands, devices (TikTok and Instagram only). `top_countries` percentages are shares among the listed countries (they add up to 100), so phrase them as "mostly from …", not as a share of all followers.
+4. Present `ai_profile` when asked about fit or quality: audience segments, interests, `fan_quality` (0–100: authenticity, purchase intent, sentiment), `persuasion` and `creator_rating` (0–5), each with a reason.
+5. Both groups are AI estimates built from the creator's public content. Say so once, and use them to compare creators or judge direction, not as exact counts.
+
+A group that is `null` while the creator is `unlocked` has no data yet; `meta.notices` says when retrying later may fill it in.
+
+`country_code` uses the same codes as the `countries` filter of `search_creators`, so "find more creators whose audience is in Spain" is a search with `countries: ["ES"]`.
+
 ### "Compare these creators"
 
-`get_creator` with `channels` (batch), then a side-by-side table and a recommendation tied to the goal (reach → views; conversation → comments and engagement; consistency → posting frequency).
+`get_creator` with `channels` (batch) — add `get_creator_audience` when audience fit matters — then a side-by-side table and a recommendation tied to the goal (reach → views; conversation → comments and engagement; consistency → posting frequency).
 
 ### "Save them to my list"
 
@@ -82,5 +98,6 @@ Then point the user to the Scrumball website to start outreach with these creato
 ## Ground rules
 
 - Use the numbers the tools return; do not estimate missing ones. `null` means the platform does not provide that field.
+- Audience data (`get_creator_audience`) is an AI estimate; label it as such when you quote it.
 - Creator numbers are snapshots taken on `updated_at`, and "last 30 days", "this week" style figures count back from that date, not from today. When `updated_at` is more than 30 days old, say "data as of <date>" next to the numbers.
 - Never unlock more creators than the user named, and never as a side effect of another request.

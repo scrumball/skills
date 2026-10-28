@@ -8,6 +8,7 @@ employee_activity_overview
 employee_ranking
 get_creator
 get_creator_posts
+get_creator_audience
 get_quota_status
 list_collection_creators
 list_collections

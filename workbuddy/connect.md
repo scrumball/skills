@@ -33,7 +33,7 @@ The user logs in with their Scrumball account (the same one as on the website; c
 | Permission on the page (English / 中文) | Lets the AI |
 |---|---|
 | View your account info / 读取你的账号基本信息 | read the account email, company and membership |
-| Use creator search and collections / 使用网红搜索与收藏功能 | search creators, view profiles and posts, manage collections |
+| Use creator search and collections / 使用网红搜索与收藏功能 | search creators, view profiles and posts, view audience insights of creators you unlocked, manage collections |
 | Spend your unlock credits to reveal creator emails / 代你消耗解锁额度获取网红邮箱 | unlock creator emails — **spends paid credits, non-refundable** |
 | View per-member usage and spending / 查看团队成员的使用与消费明细 | see each team member's activity, spending and ranking |
 | View outreach campaigns and email threads / 查看建联任务与往来邮件 | read outreach tasks, the dashboard and email threads with creators |
