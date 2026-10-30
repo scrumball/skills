@@ -51,6 +51,27 @@ npx skills add scrumball/skills -g
    3. 在 `skills` 文件夹里，把各文件夹分别单独压缩（Mac：右键 → 压缩；Windows：右键 → 发送到 → 压缩(zipped)文件夹）。每个 zip 里要包含文件夹本身，例如 `scrumball-creators/SKILL.md`。
    4. 逐个在 **Customize → Skills → + → Create skill → Upload a skill** 上传。
 
+### WorkBuddy、Trae、CodeBuddy 等国内 AI 助手
+
+这些助手里的叫法各不相同：WorkBuddy 叫「连接器」，Trae、CodeBuddy 等叫「MCP」或「MCP 服务」。做法都一样：添加一个远程服务，然后用浏览器登录 Scrumball。
+
+**WorkBuddy**：在连接器市场搜索 **Scrumball** 安装，按提示在浏览器里登录。搜不到时用自定义连接器手动添加，填法见下一段。
+
+**其他助手**：在 MCP / 连接器设置里添加一个远程服务：
+
+| 项 | 填写 |
+|---|---|
+| 名称 | `Scrumball` |
+| 类型 / 传输方式 | Streamable HTTP（有的写作 HTTP 或远程） |
+| 地址 | `https://api.scrumball.ai/mcp/server` |
+| Token、API Key、请求头 | 留空 |
+
+保存后助手会打开浏览器登录页，用 Scrumball 账号登录并授权即可。
+
+如果设置里只能填 Token / API Key、保存后不会打开浏览器登录，说明这个助手还不支持浏览器登录授权，暂时无法接入 Scrumball。Scrumball 不提供 API Key。
+
+如果助手支持 Agent Skills，接好后再运行 `npx skills add scrumball/skills -g` 装 Skill。没装 Skill 也能用，装了 AI 会用得更准。
+
 ### 确认装好了
 
 问一句「我还剩多少解锁额度？」，AI 能答出你的数字，就说明已经连上。

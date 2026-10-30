@@ -51,6 +51,27 @@ Then ask your agent anything about Scrumball, for example *"what creator emails 
    3. In the `skills` folder, compress each folder on its own (Mac: right-click → Compress; Windows: right-click → Send to → Compressed (zipped) folder). Each zip must contain the folder, for example `scrumball-creators/SKILL.md`.
    4. Upload each zip under **Customize → Skills → + → Create skill → Upload a skill**.
 
+### WorkBuddy, Trae, CodeBuddy and other agents
+
+Each agent names this differently: WorkBuddy calls it a connector (连接器); Trae, CodeBuddy and others call it an MCP server. The steps are the same: add a remote server, then sign in to Scrumball in your browser.
+
+**WorkBuddy:** search for **Scrumball** in the connector marketplace, install it and sign in when prompted. If it is not listed, add a custom connector with the settings below.
+
+**Other agents:** add a remote server in the MCP or connector settings:
+
+| Field | Value |
+|---|---|
+| Name | `Scrumball` |
+| Type / transport | Streamable HTTP (sometimes shown as HTTP or Remote) |
+| URL | `https://api.scrumball.ai/mcp/server` |
+| Token, API key, headers | Leave empty |
+
+After saving, the agent opens a sign-in page in your browser. Sign in with your Scrumball account and approve.
+
+If the settings only accept a token or API key and no browser sign-in page opens, that agent does not support browser sign-in yet and cannot connect to Scrumball. Scrumball does not issue API keys.
+
+If the agent supports Agent Skills, then run `npx skills add scrumball/skills -g` to install the skills. Scrumball works without them; with them the agent uses it more accurately.
+
 ### Check that it works
 
 Ask *"How many unlock credits do I have left?"*. If the agent answers with your numbers, you are connected.
